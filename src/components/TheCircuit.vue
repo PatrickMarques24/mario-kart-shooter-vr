@@ -226,13 +226,14 @@ const myNumber = ref(0);
 		amplitude="0"
 	></a-ocean>
 
-	<a-entity
+	<!-- <a-entity
 		gltf-model="#circuit"
 		position="38.5 -7.465 35"
 		scale="0.4 0.4 0.4"
 		rotation="0 90 0"
 	>
-	</a-entity>
+	</a-entity> -->
+
 	<!-- <a-light
 		type="ambient"
 		color="#00A8E5"
