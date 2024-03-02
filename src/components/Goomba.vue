@@ -7,6 +7,10 @@ defineProps({
 </script>
 
 <template>
-	<a-entity gltf-model="#kart" rotation="0 180 0" scale="0.005 0.005 0.005"></a-entity>
-	<!-- :position="`${x} ${y} ${z}`" -->
+	<a-entity
+		gltf-model="#goomba"
+		scale="1 1.007 1.007"
+		:position="`${x} ${y} ${z}`"
+		rotation="0 0 0"
+	></a-entity>
 </template>

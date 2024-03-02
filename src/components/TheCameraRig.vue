@@ -18,7 +18,7 @@ import "../aframe/physx-grab.js";
 			simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
 			disable-in-vr="component: simple-navmesh-constraint;"
 			camera
-			position="0 1.65 0"
+			position="0 1.63 2.5"
 		>
 			<a-entity
 				geometry="primitive: circle; radius: 0.0003;"

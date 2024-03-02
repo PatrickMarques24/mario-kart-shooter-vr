@@ -122,7 +122,7 @@ function enterScene() {
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/mvrc.art" target="_blank"
+						<a href="https://sketchfab.com/Creationed2020" target="_blank"
 							>Creationed2020</a
 						>
 						under
@@ -138,7 +138,82 @@ function enterScene() {
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/mvrc.art" target="_blank">Yanez Designs</a>
+						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
+							>Yanez Designs</a
+						>
+						under
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+							>CC BY 4.0</a
+						>
+					</dd>
+
+					<dt>
+						<a href="https://skfb.ly/6zRWI" target="_blank"
+							>Red Koopa Troopa Shell (Super Mario Bros)</a
+						>
+					</dt>
+					<dd>
+						by
+						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
+							>Yanez Designs</a
+						>
+						under
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+							>CC BY 4.0</a
+						>
+					</dd>
+
+					<dt>
+						<a href="https://skfb.ly/oyQUJ" target="_blank">super mario star</a>
+					</dt>
+					<dd>
+						by
+						<a href="https://sketchfab.com/gaelinix" target="_blank">gaelinix</a>
+						under
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+							>CC BY 4.0</a
+						>
+					</dd>
+
+					<dt>
+						<a href="https://skfb.ly/oLEQV" target="_blank">Goomba</a>
+					</dt>
+					<dd>
+						by
+						<a href="https://sketchfab.com/tirrellclark.75" target="_blank"
+							>tirrellclark.75</a
+						>
+						under
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+							>CC BY 4.0</a
+						>
+					</dd>
+					<dt>
+						<a href="https://skfb.ly/6zQG9" target="_blank"
+							>Brick Block (Super Mario Bros)</a
+						>
+					</dt>
+					<dd>
+						by
+						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
+							>Yanez Designs</a
+						>
+						under
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+							>CC BY 4.0</a
+						>
+					</dd>
+
+					<dt>
+						<a href="https://skfb.ly/optKO" target="_blank"
+							>DS DSi - Mario Kart DS - Mario Circuit</a
+						>
+					</dt>
+					<dd>
+						by
+						<a href="https://sketchfab.com/lonewolf1898" target="_blank"
+							>lonewolf1898</a
+						>
 						under
 						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 							>CC BY 4.0</a
@@ -158,20 +233,24 @@ function enterScene() {
 h1 {
 	font-size: 1.5rem;
 }
+
 a {
 	color: #eee;
 	text-decoration: none;
 }
+
 .licences {
 	margin: 2rem 0;
 	font-size: 1rem;
 	text-align: left;
 }
+
 .licences dt {
 	padding-top: 0.75rem;
 	font-size: 0.9rem;
 	font-weight: bold;
 }
+
 .licences dd {
 	margin-left: 0;
 	font-size: 0.8rem;
@@ -190,6 +269,7 @@ a {
 	z-index: 10000;
 	overflow: auto;
 }
+
 #onboarding > * {
 	margin: 0 auto;
 	max-width: 50rem;
@@ -199,6 +279,7 @@ a {
 	padding: 1rem;
 	font-size: 1.3rem;
 }
+
 #onboarding button {
 	font-size: 1.3rem;
 	padding: 0.5rem 1rem;

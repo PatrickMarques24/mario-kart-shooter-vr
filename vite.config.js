@@ -11,7 +11,7 @@ const fullReloadPlugin = {
 
 export default defineConfig(({ command, mode }) => {
 	const config = {
-		base: "/mario-kart-vr/",
+		base: "/patrick/",
 		plugins: [
 			// basicSsl(),
 			vue({

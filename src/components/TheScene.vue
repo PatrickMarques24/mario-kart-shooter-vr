@@ -2,12 +2,14 @@
 import { ref } from "vue";
 
 import TheCameraRig from "./TheCameraRig.vue";
-import TheMainRoom from "./TheMainRoom.vue";
-import TheLifeCubeRoom from "./TheLifeCubeRoom.vue";
-import ThePhysicRoom from "./ThePhysicRoom.vue";
-import TheOceanRoom from "./TheOceanRoom.vue";
-import TheSquareGroundRoom from "./TheSquareGroundRoom.vue";
+// import TheMainRoom from "./TheMainRoom.vue";
+// import TheLifeCubeRoom from "./TheLifeCubeRoom.vue";
+// import ThePhysicRoom from "./ThePhysicRoom.vue";
+// import TheOceanRoom from "./TheOceanRoom.vue";
+// import TheSquareGroundRoom from "./TheSquareGroundRoom.vue";
 import TheCircuit from "./TheCircuit.vue";
+
+import "../aframe/move-kart.js";
 
 defineProps({
 	scale: Number,
@@ -19,6 +21,7 @@ const allAssetsLoaded = ref(false);
 
 <template>
 	<a-scene
+		stats
 		background="color: skyblue;"
 		:webxr="`
       requiredFeatures: local-floor;
@@ -35,51 +38,42 @@ const allAssetsLoaded = ref(false);
     "
 	>
 		<a-assets @loaded="allAssetsLoaded = true">
-			<!--
-        Title: VR Gallery
-        Model source: https://sketchfab.com/3d-models/vr-gallery-1ac32ed62fdf424498acc146fad31f7e
-        Model author: https://sketchfab.com/mvrc.art (Maxim Mavrichev)
-        Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
-      -->
-			<!-- <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item> -->
-			<!--
-        Title: 3D Gallery for VR projects
-        Model source: https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1
-        Model author: https://sketchfab.com/tekuto1s (tekuto1s)
-        Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
-      -->
-			<!-- <a-asset-item
-				id="physic-room"
-				src="assets/3d_gallery_for_vr_projects.glb"
-			></a-asset-item>
-			<a-asset-item
-				id="sound-1"
-				response-type="arraybuffer"
-				src="assets/sound1.mp3"
-				preload="auto"
-			></a-asset-item> -->
-			<a-asset-item id="kart" src="assets/kart-ds.glb"></a-asset-item>
+			<!-- Assets -->
+			<a-asset-item id="kart" src="assets/kart.glb"></a-asset-item>
 			<a-asset-item id="banana" src="assets/banana-peel.glb"></a-asset-item>
+			<a-asset-item id="redshell" src="assets/red-shell.glb"></a-asset-item>
+			<a-asset-item id="star" src="assets/star.glb"></a-asset-item>
+			<a-asset-item id="goomba" src="assets/goomba.glb"></a-asset-item>
+			<a-asset-item id="brick" src="assets/brick.glb"></a-asset-item>
+			<a-asset-item id="circuit" src="assets/circuit.glb"></a-asset-item>
+
+			<!-- Audio -->
 			<a-asset-item
 				id="theme-music"
 				response-type="arraybuffer"
 				src="assets/sounds/mario-kart-theme.mp3"
 				preload="auto"
 			></a-asset-item>
+			<a-asset-item
+				id="start-sound"
+				response-type="arraybuffer"
+				src="assets/sounds/start.mp3"
+				preload="auto"
+			></a-asset-item>
+
+			<!-- Images -->
 			<!--<img
 				id="room-physic-out-texture"
 				:src="`assets/main-room-from-physic-room.png`"
-			/>
-			<img id="room-gol-out-texture" :src="`assets/main-room-from-gol-room.png`" />
-			<img id="room-physic-texture" :src="`assets/physicRoom.png`" />
-			<img id="room-ocean-texture" :src="`assets/ocean.jpg`" />
-			<img id="room-square-ground-texture" :src="`assets/square-room.png`" /> -->
+			/>-->
 		</a-assets>
 
 		<template v-if="allAssetsLoaded">
 			<TheCircuit />
 		</template>
 
+		<!-- <TheCameraRig move-kart /> -->
 		<TheCameraRig />
+		<!-- <TheCameraRig position="0 0 -10" /> -->
 	</a-scene>
 </template>
