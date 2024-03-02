@@ -8,6 +8,7 @@ import "../aframe/bind-rotation.js";
 import "../aframe/clickable.js";
 import "../aframe/life-like-automaton.js";
 import "../aframe/a-ocean.js";
+import "../aframe/teleport-camera-rig.js";
 
 // Utils
 import { toggleFog } from "../utils/weather-and-time.js";
@@ -138,7 +139,18 @@ const myNumber = ref(0);
 		sound="src: #start-sound; autoplay: false; loop: false; volume : 1;"
 	></a-entity>
 
-	<Kart position="0 0.274 0" clickable @click="enterInKart()" />
+	<Kart
+		position="0 0.274 0"
+		clickable
+		@click="enterInKart()"
+		:teleport-camera-rig="`
+      x: 0;
+      y: -9.99;
+      z: 0;
+      handleRotation: 'false'};
+      rot: 0;
+    `"
+	/>
 	<Banana
 		v-for="i in numberOfBananas"
 		:key="i"
@@ -245,12 +257,12 @@ const myNumber = ref(0);
 	</a-light> -->
 
 	<!-- Navigation mesh -->
-	<!-- <a-entity
+	<a-entity
 		geometry="primitive: plane; height: 5; width: 5"
 		position="0 0.01 1.5"
 		rotation="-90 0 0"
 		data-role="nav-mesh"
 		material="color: blue"
 		visible="true"
-	></a-entity> -->
+	></a-entity>
 </template>

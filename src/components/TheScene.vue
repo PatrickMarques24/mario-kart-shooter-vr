@@ -8,6 +8,7 @@ import TheCameraRig from "./TheCameraRig.vue";
 // import TheOceanRoom from "./TheOceanRoom.vue";
 // import TheSquareGroundRoom from "./TheSquareGroundRoom.vue";
 import TheCircuit from "./TheCircuit.vue";
+import TheWaitingRoom from "./TheWaitingRoom.vue";
 
 import "../aframe/move-kart.js";
 
@@ -70,6 +71,7 @@ const allAssetsLoaded = ref(false);
 
 		<template v-if="allAssetsLoaded">
 			<TheCircuit />
+			<TheWaitingRoom />
 		</template>
 
 		<!-- <TheCameraRig move-kart /> -->
