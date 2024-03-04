@@ -48,67 +48,46 @@ function enterScene() {
 						<i>Included technologies</i>
 					</dt>
 					<dt>
-						<a href="https://github.com/c-frame/aframe-extras" target="_blank"
-							>aframe-extras controls and animation-mixer</a
-						>
+						<a href="https://github.com/c-frame/aframe-extras" target="_blank">aframe-extras controls and
+							animation-mixer</a>
 					</dt>
 					<dd>
-						<a
-							href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE"
-							target="_blank"
-							>MIT License</a
-						>
+						<a href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE" target="_blank">MIT
+							License</a>
 					</dd>
 
 					<dt>
-						<a href="https://github.com/c-frame/physx" target="_blank"
-							>aframe physx</a
-						>
+						<a href="https://github.com/c-frame/physx" target="_blank">aframe physx</a>
 					</dt>
 					<dd>
-						<a
-							href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE"
-							target="_blank"
-							>MIT License</a
-						>
+						<a href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE" target="_blank">MIT
+							License</a>
 					</dd>
 
 					<dt>
-						<a href="https://github.com/jure/aframe-blink-controls/" target="_blank"
-							>aframe-blink-controls</a
-						>
+						<a href="https://github.com/jure/aframe-blink-controls/"
+							target="_blank">aframe-blink-controls</a>
 					</dt>
 					<dd>
-						<a
-							href="https://github.com/jure/aframe-blink-controls/blob/main/LICENSE"
-							target="_blank"
-							>MIT License</a
-						>
+						<a href="https://github.com/jure/aframe-blink-controls/blob/main/LICENSE" target="_blank">MIT
+							License</a>
 					</dd>
 
 					<dt>
-						<a
-							href=" https://github.com/AdaRoseCannon/aframe-xr-boilerplate"
-							target="_blank"
-							>simple-navmesh-constraint</a
-						>
+						<a href=" https://github.com/AdaRoseCannon/aframe-xr-boilerplate"
+							target="_blank">simple-navmesh-constraint</a>
 					</dt>
 					<dd>By Ada Rose Cannon under MIT License</dd>
 
 					<dt>
-						<a
-							href="https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1"
-							target="_blank"
-							>Physic room model</a
-						>
+						<a href="https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1"
+							target="_blank">Physic room model</a>
 					</dt>
 					<dd>
 						by
 						<a href="https://sketchfab.com/tekuto1s" target="_blank">tekuto1s</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
@@ -116,51 +95,33 @@ function enterScene() {
 					</dt>
 
 					<dt>
-						<a href="https://skfb.ly/6VMzS" target="_blank"
-							>DS D Si - Mario Kart DS - Standard MR</a
-						>
+						<a href="https://skfb.ly/6VMzS" target="_blank">DS D Si - Mario Kart DS - Standard MR</a>
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/Creationed2020" target="_blank"
-							>Creationed2020</a
-						>
+						<a href="https://sketchfab.com/Creationed2020" target="_blank">Creationed2020</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
-						<a href="https://skfb.ly/6EvGw" target="_blank"
-							>Banana Peel (Mario Kart)</a
-						>
+						<a href="https://skfb.ly/6EvGw" target="_blank">Banana Peel (Mario Kart)</a>
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
-							>Yanez Designs</a
-						>
+						<a href="https://sketchfab.com/Yanez-Designs" target="_blank">Yanez Designs</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
-						<a href="https://skfb.ly/6zRWI" target="_blank"
-							>Red Koopa Troopa Shell (Super Mario Bros)</a
-						>
+						<a href="https://skfb.ly/6zRWI" target="_blank">Red Koopa Troopa Shell (Super Mario Bros)</a>
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
-							>Yanez Designs</a
-						>
+						<a href="https://sketchfab.com/Yanez-Designs" target="_blank">Yanez Designs</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
@@ -170,9 +131,7 @@ function enterScene() {
 						by
 						<a href="https://sketchfab.com/gaelinix" target="_blank">gaelinix</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
@@ -180,48 +139,55 @@ function enterScene() {
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/tirrellclark.75" target="_blank"
-							>tirrellclark.75</a
-						>
+						<a href="https://sketchfab.com/tirrellclark.75" target="_blank">tirrellclark.75</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 					<dt>
-						<a href="https://skfb.ly/6zQG9" target="_blank"
-							>Brick Block (Super Mario Bros)</a
-						>
+						<a href="https://skfb.ly/6zQG9" target="_blank">Brick Block (Super Mario Bros)</a>
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
-							>Yanez Designs</a
-						>
+						<a href="https://sketchfab.com/Yanez-Designs" target="_blank">Yanez Designs</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
-						<a href="https://skfb.ly/optKO" target="_blank"
-							>DS DSi - Mario Kart DS - Mario Circuit</a
-						>
+						<a href="https://skfb.ly/optKO" target="_blank">DS DSi - Mario Kart DS - Mario Circuit</a>
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/lonewolf1898" target="_blank"
-							>lonewolf1898</a
-						>
+						<a href="https://sketchfab.com/lonewolf1898" target="_blank">lonewolf1898</a>
 						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
+						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
 
 					<dt>
 						<i>Included audio</i>
+							<dt>
+							<a href="https://opengameart.org/content/countdown" target="_blank">Countdown</a>
+							</dt>
+							<dd>
+								by
+								<a href="https://opengameart.org/users/qubodup" target="_blank">qubodup</a>
+								under
+								<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>
+							</dd>
+							<dd>
+								Modifications : Added the files together in the order, countdown-a, countdown-a, countdown-b.
+							</dd>
+
+							<dt>
+							<a href="https://opengameart.org/content/starfishario" target="_blank">Starfishario</a>
+							</dt>
+							<dd>
+								by
+								<a href="https://opengameart.org/users/iamoneabe" target="_blank">iamoneabe</a>
+								under
+								<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC 0</a>
+							</dd>
+
 					</dt>
 				</dl>
 			</div>
@@ -270,7 +236,7 @@ a {
 	overflow: auto;
 }
 
-#onboarding > * {
+#onboarding>* {
 	margin: 0 auto;
 	max-width: 50rem;
 	width: calc(100vw - 10rem);

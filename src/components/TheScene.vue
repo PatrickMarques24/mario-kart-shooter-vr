@@ -52,7 +52,7 @@ const allAssetsLoaded = ref(false);
 			<a-asset-item
 				id="theme-music"
 				response-type="arraybuffer"
-				src="assets/sounds/mario-kart-theme.mp3"
+				src="assets/sounds/main.mp3"
 				preload="auto"
 			></a-asset-item>
 			<a-asset-item

@@ -130,10 +130,10 @@ const myNumber = ref(0);
 </script>
 
 <template>
-	<!-- <a-entity
+	<a-entity
 		id="theme-music-play"
-		sound="src: #theme-music; autoplay: false; loop: true; volume : 0.025;"
-	></a-entity> -->
+		sound="src: #theme-music; autoplay: false; loop: true; volume : 0.8;"
+	></a-entity>
 	<a-entity
 		id="start"
 		sound="src: #start-sound; autoplay: false; loop: false; volume : 1;"
