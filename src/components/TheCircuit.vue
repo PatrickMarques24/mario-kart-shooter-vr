@@ -1,6 +1,7 @@
 <script setup>
 // Vue
-import { ref } from "vue";
+import { watch, ref } from "vue";
+import { gameDiff } from "../store/game.js";
 
 // A-Frame
 import "../aframe/bind-position.js";
@@ -9,12 +10,13 @@ import "../aframe/clickable.js";
 import "../aframe/life-like-automaton.js";
 import "../aframe/a-ocean.js";
 import "../aframe/teleport-camera-rig.js";
+import "../aframe/simple-grab.js";
+import "../aframe/proximity-trigger.js";
+import "../aframe/move.js";
 
 // Utils
 import { toggleFog } from "../utils/weather-and-time.js";
-import { copyPosition, copyRotation } from "../utils/aframe.js";
 import { createPavement } from "../utils/create-pavement.js";
-import { grabTheThing } from "../utils/grab-and-drop.js";
 import { positionOnLeftAndRightTheMiddleLane } from "../utils/position-on-lane.js";
 
 // Components
@@ -23,11 +25,59 @@ import Banana from "./Banana.vue";
 import RedShell from "./RedShell.vue";
 import Star from "./Star.vue";
 
-defineProps({
-	numberOfBananas: { type: Number, default: 10 },
-	numberOfRedShells: { type: Number, default: 10 },
-	numberOfStars: { type: Number, default: 5 },
-	// numberOfGoombas: { type: Number, default: 10 },
+// defineProps({
+// 	numberOfBananas: { type: Number, default: 0 },
+// 	numberOfRedShells: { type: Number, default: 0 },
+// 	numberOfStars: { type: Number, default: 0 },
+// 	// numberOfGoombas: { type: Number, default: 10 },
+// });
+
+let numberOfBananas = 0;
+let numberOfRedShells = 0;
+let numberOfStars = 0;
+
+const loaded = ref(false);
+
+watch(gameDiff, (difficulty) => {
+	// document.querySelector("#head").setAttribute("move", "");
+	document.querySelector("#mykart").setAttribute("move", "");
+	document.querySelector("#mykart").removeAttribute("clickable");
+	document
+		.querySelector("#camera-rig")
+		.setAttribute("bind-position", "target: #mykart");
+
+	const allGoombas = document.querySelectorAll(".goombas");
+	allGoombas.forEach((goomba) => {
+		goomba.setAttribute("clickable", "");
+		// goomba.setAttribute("simple-grab", "");
+	});
+	// document.querySelector(".camera-container").setAttribute("move", "");
+	// Play the countdown
+	document.querySelector("#start").components.sound.playSound();
+	// alert(difficulty);
+	switch (difficulty) {
+		case "easy":
+			numberOfBananas = 15;
+			numberOfRedShells = 15;
+			numberOfStars = 15;
+			loaded.value = true;
+			break;
+		case "medium":
+			numberOfBananas = 10;
+			numberOfRedShells = 10;
+			numberOfStars = 10;
+			loaded.value = true;
+			break;
+		case "hard":
+			numberOfBananas = 5;
+			numberOfRedShells = 5;
+			numberOfStars = 5;
+			loaded.value = true;
+			break;
+		default:
+			alert("Nothing appenend");
+			break;
+	}
 });
 
 toggleFog(true, "00AAFF", 20, 40);
@@ -71,106 +121,53 @@ const targetBoxes = {
 	},
 };
 
-createPavement(startSquare, -2.39, 0, -2);
-createPavement(startSquare, -2.39, 0, -52);
+createPavement(startSquare, -2.39, 0.025, -2);
+createPavement(startSquare, -2.39, 0.025, -52);
 createPavement(roadSquare, -2.015, 0, -26.625);
 createPavement(targetBoxes, -3.5, 0, -51.625, -0.25, 0.25, true);
 createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
-
-// function dropTheThing(evt) {
-// 	const grabbedEl = document.querySelector("[data-grabbed]");
-// 	// if nothing grabbed, return
-// 	if (!grabbedEl) return;
-
-// 	//drop it
-// 	grabbedEl.removeAttribute("bind-position");
-// 	grabbedEl.removeAttribute("bind-rotation");
-// 	copyPosition(evt.target, grabbedEl);
-// 	copyRotation(evt.target, grabbedEl);
-// 	delete grabbedEl.dataset.grabbed;
-
-// 	const dropZoneId = evt.target.id;
-// 	// if something was in the drop zone, grab it
-// 	const elInDropZone = document.querySelector(`[data-dropped="${dropZoneId}"]`);
-// 	if (elInDropZone) {
-// 		grabTheThing({ target: elInDropZone });
-// 	}
-
-// 	grabbedEl.dataset.dropped = dropZoneId;
-// }
-
-function dropTheThing(evt) {
-	const grabbedEl = document.querySelector("[data-grabbed]");
-	// if nothing grabbed, return
-	if (!grabbedEl) return;
-
-	//drop it
-	// console.log(evt.target);
-	grabbedEl.removeAttribute("bind-position");
-	grabbedEl.removeAttribute("bind-rotation");
-	copyPosition(evt.target, grabbedEl);
-	copyRotation(evt.target, grabbedEl);
-	delete grabbedEl.dataset.grabbed;
-
-	const dropZoneId = evt.target.id;
-	// if something was in the drop zone, grab it
-	const elInDropZone = document.querySelector(`[data-dropped="${dropZoneId}"]`);
-	if (elInDropZone) {
-		grabTheThing({ target: elInDropZone });
-	}
-
-	grabbedEl.dataset.dropped = dropZoneId;
-}
-
-function enterInKart() {
-	document.querySelector("#start").components.sound.playSound();
-}
-
-const myNumber = ref(0);
 </script>
 
 <template>
 	<a-entity
 		id="theme-music-play"
-		sound="src: #theme-music; autoplay: false; loop: true; volume : 0.8;"
+		sound="src: #theme-music; autoplay: false; loop: true; volume : 0.4;"
 	></a-entity>
 	<a-entity
 		id="start"
 		sound="src: #start-sound; autoplay: false; loop: false; volume : 1;"
+		position="0 0.8 -0.2"
 	></a-entity>
 
 	<Kart
+		id="mykart"
 		position="0 0.274 0"
 		clickable
-		@click="enterInKart()"
-		:teleport-camera-rig="`
-      x: 0;
-      y: -9.99;
-      z: 0;
-      handleRotation: 'false'};
-      rot: 0;
-    `"
+		:teleport-camera-rig="` x: 0; y: -100; z: 0;
+	handleRotation: 'false'; rot: 0; `"
 	/>
 	<Banana
+		v-if="loaded"
 		v-for="i in numberOfBananas"
 		:key="i"
 		:x="positionOnLeftAndRightTheMiddleLane()"
 		:y="0.3"
-		:z="Math.random() * 45 - 52"
+		:z="Math.random() * 45 - 49"
 		:rotation="`0 ${Math.random() * 3600} 0`"
 		clickable
-		@click="(evt) => grabTheThing(evt)"
+		simple-grab
 	/>
 
 	<RedShell
+		v-if="loaded"
 		v-for="i in numberOfRedShells"
 		:key="i"
 		:x="positionOnLeftAndRightTheMiddleLane()"
 		:y="0"
-		:z="Math.random() * 45 - 52"
+		:z="Math.random() * 45 - 49"
 		:rotation="`0 ${Math.random() * 3600} 0`"
 		clickable
-		@click="(evt) => grabTheThing(evt)"
+		simple-grab
 	/>
 
 	<!-- I want to make an elevate animation for the stars below but i need to save their x and z position before -->
@@ -179,13 +176,14 @@ const myNumber = ref(0);
 		animation__elevate="property: position; to: 0 0.5 0; autoplay: true; dir: alternate; loop: true; dur: 1000; easing: easeInOutQuad"
 	>
 		<Star
+			v-if="loaded"
 			v-for="i in numberOfStars"
 			:key="i"
 			:x="positionOnLeftAndRightTheMiddleLane()"
 			:y="0.256"
-			:z="Math.random() * 45 - 52"
+			:z="Math.random() * 45 - 49"
 			clickable
-			@click="(evt) => grabTheThing(evt)"
+			simple-grab
 		/>
 	</a-entity>
 
@@ -200,51 +198,33 @@ const myNumber = ref(0);
 		wrap-count="20"
 		side="double"
 	></a-text>
-	<a-plane
-		color="#22AA22"
-		width="20"
-		height="100"
-		rotation="-90 0 0"
-		position="0 0 -25"
-	></a-plane>
-	<a-ocean
-		color="#00AAFF"
-		width="100"
-		depth="100"
-		density="100"
-		speed="0.5"
-		position="50 -0.3 -25"
-		amplitudeVariance="0.05"
-		amplitude="0"
-	></a-ocean>
-	<a-ocean
-		color="#0055AA"
-		width="100"
-		depth="100"
-		density="20"
-		speed="0.5"
-		position="50 -0.3 -25"
-		amplitudeVariance="0.05"
-		amplitude="0"
-	></a-ocean>
-	<a-ocean
-		color="#3377BB"
-		width="100"
-		depth="100"
-		density="20"
-		speed="0.5"
-		position="50 -0.3 -25"
-		amplitudeVariance="0.05"
-		amplitude="0"
-	></a-ocean>
 
-	<!-- <a-entity
+	<a-entity
 		gltf-model="#circuit"
-		position="38.5 -7.465 35"
+		position="38.5 -7.465 10"
 		scale="0.4 0.4 0.4"
 		rotation="0 90 0"
 	>
-	</a-entity> -->
+	</a-entity>
+
+	<a-plane
+		position="0 0.01 -51.625"
+		rotation="-90 0 0"
+		width="5"
+		height="1"
+		color="#00AAFF"
+		visible="false"
+	></a-plane>
+
+	<a-text
+		id="score-text"
+		position="0 1.63 -56"
+		rotation="0 0 0"
+		color="black"
+		align="center"
+		width="2"
+		side="double"
+	></a-text>
 
 	<!-- <a-light
 		type="ambient"
@@ -257,12 +237,14 @@ const myNumber = ref(0);
 	</a-light> -->
 
 	<!-- Navigation mesh -->
-	<a-entity
+	<!-- <a-entity
+		id="originalnavmesh"
 		geometry="primitive: plane; height: 5; width: 5"
 		position="0 0.01 1.5"
 		rotation="-90 0 0"
 		data-role="nav-mesh"
 		material="color: blue"
 		visible="true"
-	></a-entity>
+	></a-entity> -->
 </template>
+../aframe/move.js

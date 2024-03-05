@@ -11,17 +11,18 @@ import "../aframe/physx-grab.js";
 		id="camera-rig"
 		movement-controls="camera: #head;"
 		disable-in-vr="component: movement-controls;"
+		position="0 -100 0"
 	>
 		<a-entity
 			id="head"
 			look-controls="pointerLockEnabled: true"
-			simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.65;"
+			simple-navmesh-constraint="navmesh: [data-role='nav-mesh']; height: 1.63;"
 			disable-in-vr="component: simple-navmesh-constraint;"
 			camera
-			position="0 1.63 2.5"
+			position="0 1.63 0"
 		>
 			<a-entity
-				geometry="primitive: circle; radius: 0.0003;"
+				geometry="primitive: circle; radius: 0.001;"
 				material="shader: flat; color: white;"
 				cursor
 				raycaster="far: 4; objects: [clickable]; showLine: false;"

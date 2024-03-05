@@ -1,4 +1,5 @@
 import { grabTheThing } from "./grab-and-drop.js";
+import { goombaKilled } from "../store/game.js";
 
 export const createPavement = (
 	data,
@@ -58,7 +59,7 @@ export const createPavement = (
 				const goomba = document.createElement("a-entity");
 				goomba.setAttribute("gltf-model", "#goomba");
 				goomba.setAttribute("scale", "0.007 0.007 0.007");
-				goomba.setAttribute("clickable", "");
+				// goomba.setAttribute("clickable", "");
 				goomba.setAttribute(
 					"position",
 					`${i * (data.square.width + data.offset)} ${
@@ -73,7 +74,11 @@ export const createPavement = (
 					goomba.setAttribute("rotation", "0 90 0");
 				}
 
-				goomba.addEventListener("click", (evt) => grabTheThing(evt));
+				goomba.classList.add("goombas");
+
+				goomba.addEventListener("click", (e) => killGoomba(e));
+
+				// goomba.setAttribute("simple-grab", "");
 				tileFloor.appendChild(goomba);
 
 				// position the tile, we will use the offset to space them out
@@ -93,3 +98,14 @@ export const createPavement = (
 
 	document.querySelector("a-scene").appendChild(tileFloor);
 };
+
+function killGoomba(e, x, y, z) {
+	e.currentTarget.setAttribute(
+		"animation",
+		"property: scale; to: 0 0 0; dur: 500; easing: easeInSine; autoplay : true;"
+	);
+	goombaKilled.value++;
+	setTimeout(() => {
+		e.currentTarget.remove();
+	}, 500);
+}

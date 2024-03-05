@@ -93,13 +93,12 @@ function enterScene() {
 					<dt>
 						<i>Included 3D assets</i>
 					</dt>
-
-					<dt>
-						<a href="https://skfb.ly/6VMzS" target="_blank">DS D Si - Mario Kart DS - Standard MR</a>
+<dt>
+						<a href="https://skfb.ly/6TuMD" target="_blank">Go Kart</a>
 					</dt>
 					<dd>
 						by
-						<a href="https://sketchfab.com/Creationed2020" target="_blank">Creationed2020</a>
+						<a href="https://sketchfab.com/SamuelTea" target="_blank">Samuel Thomas</a>
 						under
 						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
@@ -162,6 +161,9 @@ function enterScene() {
 						under
 						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
 					</dd>
+					<dd>
+								Modifications : Finish line deleted
+							</dd>
 
 					<dt>
 						<i>Included audio</i>
@@ -256,4 +258,3 @@ a {
 	cursor: pointer;
 }
 </style>
-#onboarding li { #onboarding li { font-size: 1rem; text-align: left; }

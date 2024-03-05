@@ -10,7 +10,7 @@ import TheCameraRig from "./TheCameraRig.vue";
 import TheCircuit from "./TheCircuit.vue";
 import TheWaitingRoom from "./TheWaitingRoom.vue";
 
-import "../aframe/move-kart.js";
+import "../aframe/move.js";
 
 defineProps({
 	scale: Number,
@@ -22,7 +22,6 @@ const allAssetsLoaded = ref(false);
 
 <template>
 	<a-scene
-		stats
 		background="color: skyblue;"
 		:webxr="`
       requiredFeatures: local-floor;
@@ -46,7 +45,7 @@ const allAssetsLoaded = ref(false);
 			<a-asset-item id="star" src="assets/star.glb"></a-asset-item>
 			<a-asset-item id="goomba" src="assets/goomba.glb"></a-asset-item>
 			<a-asset-item id="brick" src="assets/brick.glb"></a-asset-item>
-			<a-asset-item id="circuit" src="assets/circuit.glb"></a-asset-item>
+			<a-asset-item id="circuit" src="assets/circuit.gltf"></a-asset-item>
 
 			<!-- Audio -->
 			<a-asset-item
@@ -74,7 +73,6 @@ const allAssetsLoaded = ref(false);
 			<TheWaitingRoom />
 		</template>
 
-		<!-- <TheCameraRig move-kart /> -->
 		<TheCameraRig />
 		<!-- <TheCameraRig position="0 0 -10" /> -->
 	</a-scene>
