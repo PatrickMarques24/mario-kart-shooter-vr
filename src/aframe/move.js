@@ -31,6 +31,7 @@ AFRAME.registerComponent("move", {
 	},
 	tick: function () {
 		const cameraRig = document.querySelector("#camera-rig");
+		const scorePlane = document.querySelector("#score-plane");
 		const scoreText = document.querySelector("#score-text");
 		setTimeout(() => {
 			if (this.data.posZ > -53) {
@@ -52,18 +53,25 @@ AFRAME.registerComponent("move", {
 					this.el.setAttribute("position", `0 0.274 ${this.data.posZ}`);
 				}
 			} else {
-				// this.el.setAttribute("position", `0 1.63 ${this.data.posZ}`);
-				// // if its the kart, its other position
-				// if (this.el.getAttribute("id") === "mykart") {
-				// 	this.el.setAttribute("position", `0 0.274 ${this.data.posZ}`);
-				// }
+				// We cannot more shoot the goombas
+				document.querySelectorAll(".goombas").forEach((goomba) => {
+					goomba.removeAttribute("clickable");
+				});
+
 				cameraRig.setAttribute("movement-controls", "camera: #head;");
 				cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
 				scoreText.setAttribute(
 					"value",
-					`Congratulations \n You killed ${goombaKilled.value} goombas!`
+					`${
+						goombaKilled.value > 0 ? "Congratulations ! 🏆" : "Oh no :("
+					} \n You killed ${goombaKilled.value} ${
+						goombaKilled.value > 1 ? "goombas" : "goomba"
+					}!`
 				);
-				scoreText.setAttribute("visible", "true");
+				scorePlane.setAttribute("visible", "true");
+
+				document.querySelector("#camera-rig").removeAttribute("bind-position");
+				// document.querySelector("#restart-plane").setAttribute("visible", "true");
 			}
 		}, 3000);
 	},

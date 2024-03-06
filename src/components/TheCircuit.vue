@@ -1,7 +1,15 @@
 <script setup>
 // Vue
 import { watch, ref } from "vue";
-import { gameDiff } from "../store/game.js";
+import {
+	gameDiff,
+	startSquare,
+	roadSquare,
+	targetBoxes,
+	easy,
+	medium,
+	hard,
+} from "../store/game.js";
 
 // A-Frame
 import "../aframe/bind-position.js";
@@ -24,21 +32,40 @@ import Kart from "./Kart.vue";
 import Banana from "./Banana.vue";
 import RedShell from "./RedShell.vue";
 import Star from "./Star.vue";
-
-// defineProps({
-// 	numberOfBananas: { type: Number, default: 0 },
-// 	numberOfRedShells: { type: Number, default: 0 },
-// 	numberOfStars: { type: Number, default: 0 },
-// 	// numberOfGoombas: { type: Number, default: 10 },
-// });
+import Lakitu from "./Lakitu.vue";
 
 let numberOfBananas = 0;
 let numberOfRedShells = 0;
 let numberOfStars = 0;
+let personalColor = "black";
 
 const loaded = ref(false);
 
 watch(gameDiff, (difficulty) => {
+	const lakituText = document.querySelector("#lakitu-text");
+	lakituText.setAttribute("value", "3");
+	lakituText.setAttribute("scale", "0.2 0.2 0.2");
+
+	setTimeout(() => {
+		lakituText.setAttribute("value", "2");
+	}, 1500);
+
+	setTimeout(() => {
+		lakituText.setAttribute("value", "GO !");
+		// Go to the sky
+		document
+			.querySelector("#lakitu-instance")
+			.setAttribute(
+				"animation__2",
+				"property: position; to: 1 10 -3; dur: 2000; easing: easeInOutQuad; delay: 500"
+			);
+		document
+			.querySelector("#lakitu-instance")
+			.setAttribute(
+				"animation__3",
+				"property: scale; to: 0 0 0; dur: 2000; easing: easeInOutQuad; delay: 500"
+			);
+	}, 2500);
 	// document.querySelector("#head").setAttribute("move", "");
 	document.querySelector("#mykart").setAttribute("move", "");
 	document.querySelector("#mykart").removeAttribute("clickable");
@@ -57,21 +84,24 @@ watch(gameDiff, (difficulty) => {
 	// alert(difficulty);
 	switch (difficulty) {
 		case "easy":
-			numberOfBananas = 15;
-			numberOfRedShells = 15;
-			numberOfStars = 10;
+			numberOfBananas = easy.bananas;
+			numberOfRedShells = easy.redShells;
+			numberOfStars = easy.stars;
+			personalColor = easy.color;
 			loaded.value = true;
 			break;
 		case "medium":
-			numberOfBananas = 10;
-			numberOfRedShells = 10;
-			numberOfStars = 5;
+			numberOfBananas = medium.bananas;
+			numberOfRedShells = medium.redShells;
+			numberOfStars = medium.stars;
+			personalColor = medium.color;
 			loaded.value = true;
 			break;
 		case "hard":
-			numberOfBananas = 5;
-			numberOfRedShells = 5;
-			numberOfStars = 2;
+			numberOfBananas = hard.bananas;
+			numberOfRedShells = hard.redShells;
+			numberOfStars = hard.stars;
+			personalColor = hard.color;
 			loaded.value = true;
 			break;
 		default:
@@ -81,45 +111,6 @@ watch(gameDiff, (difficulty) => {
 });
 
 toggleFog(true, "00AAFF", 20, 40);
-
-const startSquare = {
-	rows: 4,
-	cols: 20,
-	offset: 0,
-	square: {
-		width: 0.25,
-		height: 0.05,
-		depth: 0.25,
-		color1: "black",
-		color2: "white",
-	},
-};
-
-const roadSquare = {
-	rows: 1,
-	cols: 5,
-	offset: 0,
-	square: {
-		width: 1,
-		height: 0.05,
-		depth: 49,
-		color1: "#555",
-		color2: "#666",
-	},
-};
-
-const targetBoxes = {
-	rows: 51,
-	cols: 1,
-	offset: 0,
-	square: {
-		width: 1,
-		height: 1,
-		depth: 1,
-		color1: "brown",
-		color2: "brown",
-	},
-};
 
 createPavement(startSquare, -2.39, 0.025, -2);
 createPavement(startSquare, -2.39, 0.025, -52);
@@ -132,11 +123,13 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 	<a-entity
 		id="theme-music-play"
 		sound="src: #theme-music; autoplay: false; loop: true; volume : 0.4;"
+		bind-position="target: #head"
 	></a-entity>
 	<a-entity
 		id="start"
 		sound="src: #start-sound; autoplay: false; loop: false; volume : 1;"
 		position="0 0.8 -0.2"
+		bind-position="target: #head"
 	></a-entity>
 
 	<Kart
@@ -146,6 +139,7 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		:teleport-camera-rig="` x: 0; y: -100; z: 0;
 	handleRotation: 'false'; rot: 0; `"
 	/>
+
 	<Banana
 		v-if="loaded"
 		v-for="i in numberOfBananas"
@@ -170,7 +164,8 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		simple-grab
 	/>
 
-	<!-- I want to make an elevate animation for the stars below but i need to save their x and z position before -->
+	<Lakitu id="lakitu-instance" :x="1" :y="0.5" :z="-3" />
+
 	<a-entity
 		position="0 0.2 0"
 		animation__elevate="property: position; to: 0 0.5 0; autoplay: true; dir: alternate; loop: true; dur: 1000; easing: easeInOutQuad"
@@ -186,18 +181,6 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 			simple-grab
 		/>
 	</a-entity>
-
-	<a-text
-		value="Welcome to Mario Kart VR"
-		position="0 2 -2"
-		rotation="0 0 0"
-		scale="0.5 0.5 0.5"
-		color="black"
-		align="center"
-		width="10"
-		wrap-count="20"
-		side="double"
-	></a-text>
 
 	<a-entity
 		gltf-model="#circuit"
@@ -217,17 +200,49 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		visible="false"
 	></a-plane> -->
 
-	<
-
-	<a-text
-		id="score-text"
-		position="0 1.63 -56"
+	<a-plane
+		id="score-plane"
+		position="0 1.5 -55"
 		rotation="0 0 0"
-		color="black"
-		align="center"
-		width="2"
+		width="3"
+		height="1"
+		:color="`${personalColor}`"
+		opacity="0.9"
+		visible="false"
 		side="double"
-	></a-text>
+	>
+		<a-text
+			id="score-text"
+			position="0 0 0.01"
+			rotation="0 0 0"
+			color="black"
+			align="center"
+			width="2"
+			side="double"
+		></a-text>
+	</a-plane>
+
+	<a-plane
+		id="restart-plane"
+		position="0 0.5 -55"
+		height="0.5"
+		width="1.5"
+		color="red"
+		clickable
+		visible="false"
+		:teleport-camera-rig="` x: 0; y: -100; z: 0;
+	handleRotation: 'false'; rot: 0; `"
+	>
+		><a-text
+			value="Restart"
+			id="score-text"
+			position="0 0 0.01"
+			rotation="0 0 0"
+			color="white"
+			align="center"
+			width="2"
+		></a-text
+	></a-plane>
 
 	<!-- <a-light
 		type="ambient"
@@ -250,4 +265,3 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		visible="true"
 	></a-entity> -->
 </template>
-../aframe/move.js

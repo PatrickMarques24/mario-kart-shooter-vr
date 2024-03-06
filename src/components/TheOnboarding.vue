@@ -190,6 +190,16 @@ function enterScene() {
 								<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC 0</a>
 							</dd>
 
+							<dt>
+							<a href="https://skfb.ly/oBoZp" target="_blank">Lakitu</a>
+							</dt>
+							<dd>
+								by
+								<a href="https://sketchfab.com/XenMC" target="_blank">Xen</a>
+								under
+								<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
+							</dd>
+
 					</dt>
 				</dl>
 			</div>

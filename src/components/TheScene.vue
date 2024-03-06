@@ -46,6 +46,7 @@ const allAssetsLoaded = ref(false);
 			<a-asset-item id="goomba" src="assets/goomba.glb"></a-asset-item>
 			<a-asset-item id="brick" src="assets/brick.glb"></a-asset-item>
 			<a-asset-item id="circuit" src="assets/circuit.gltf"></a-asset-item>
+			<a-asset-item id="lakitu" src="assets/lakitu.glb"></a-asset-item>
 
 			<!-- Audio -->
 			<a-asset-item

@@ -26,6 +26,29 @@ if (AFRAME.utils.device.checkHeadsetConnected()) {
 	rot: 0;
   `;
 }
+
+let music = true;
+
+function toggleMusic() {
+	music = !music;
+
+	const theme = document.querySelector("#theme-music-play");
+	const start = document.querySelector("#start");
+
+	if (music) {
+		theme.setAttribute(
+			"sound",
+			"src: #theme-music; autoplay: true; loop: true; volume : 0.4;"
+		);
+		start.setAttribute("sound", "src: #start-sound; loop: false; volume : 1;");
+	} else {
+		theme.setAttribute(
+			"sound",
+			"src: #theme-music; autoplay: true; loop: true; volume : 0;"
+		);
+		start.setAttribute("sound", "src: #start-sound;  loop: false; volume : 0;");
+	}
+}
 </script>
 
 <template>
@@ -107,6 +130,29 @@ if (AFRAME.utils.device.checkHeadsetConnected()) {
 			position="1 -1.3 -2.75"
 			rotation="0 0 0"
 			color="#FFF"
+			align="center"
+			width="1.5"
+			side="double"
+		></a-text>
+
+		<!-- Sound -->
+		<a-box
+			opacity="0.8"
+			side="double"
+			width="3"
+			height="0.5"
+			depth="0.5"
+			color="white"
+			position="0 -2.3 -3"
+			clickable
+			@click="toggleMusic()"
+			visible="true"
+		></a-box>
+		<a-text
+			value="Toggle sound"
+			position="0 -2.3 -2.75"
+			rotation="0 0 0"
+			color="#000"
 			align="center"
 			width="1.5"
 			side="double"
