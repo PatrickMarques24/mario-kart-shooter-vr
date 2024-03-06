@@ -2,6 +2,8 @@ import { ref } from "vue";
 
 export const gameDiff = ref("none");
 
+export const gameFinished = ref(false);
+
 export const goombaKilled = ref(0);
 
 export const startSquare = {

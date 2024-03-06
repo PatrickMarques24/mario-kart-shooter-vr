@@ -3,6 +3,8 @@
 import { watch, ref } from "vue";
 import {
 	gameDiff,
+	gameFinished,
+	goombaKilled,
 	startSquare,
 	roadSquare,
 	targetBoxes,
@@ -34,14 +36,57 @@ import RedShell from "./RedShell.vue";
 import Star from "./Star.vue";
 import Lakitu from "./Lakitu.vue";
 
+// Const and variables
 let numberOfBananas = 0;
 let numberOfRedShells = 0;
 let numberOfStars = 0;
 let personalColor = "black";
 
+const cameraRig = document.querySelector("#camera-rig");
+const head = document.querySelector("#head");
+const scorePlane = document.querySelector("#score-plane");
+const scoreText = document.querySelector("#score-text");
+
 const loaded = ref(false);
 
+watch(gameFinished, (finished) => {
+	// alert(finished);
+	// if (finished) {
+	// document.querySelectorAll(".goombas").forEach((goomba) => {
+	// 	goomba.removeAttribute("clickable");
+	// });
+	// cameraRig.setAttribute("movement-controls", "camera: #head;");
+	// cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
+	// scoreText.setAttribute(
+	// 	"value",
+	// 	`${
+	// 		goombaKilled.value > 0 ? "Congratulations ! 🏆" : "Oh no :("
+	// 	} \n You killed ${goombaKilled.value} ${
+	// 		goombaKilled.value > 1 ? "goombas" : "goomba"
+	// 	}!`
+	// );
+	// scorePlane.setAttribute("visible", "true");
+	// document.querySelector("#camera-rig").removeAttribute("bind-position");
+	// document.querySelector("#restart-plane").setAttribute("visible", "true");
+	// }
+});
+
 watch(gameDiff, (difficulty) => {
+	// If we arent in VR, change the position of the camera
+	// It's not allowed to move the camera in VR
+	if (!AFRAME.utils.device.checkHeadsetConnected()) {
+		head.setAttribute("position", `0 0.8 -0.2`);
+	}
+
+	// If we are in VR
+	if (AFRAME.utils.device.checkHeadsetConnected()) {
+		// cameraRig.setAttribute("position", `0 0 -0.2`);
+	}
+
+	// Disable WASD controls
+	cameraRig.removeAttribute("movement-controls");
+
+	// We begin the game
 	const lakituText = document.querySelector("#lakitu-text");
 	lakituText.setAttribute("value", "3");
 	lakituText.setAttribute("scale", "0.2 0.2 0.2");
@@ -135,6 +180,7 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 	<Kart
 		id="mykart"
 		position="0 0.274 0"
+		rotation="0 180 0"
 		clickable
 		:teleport-camera-rig="` x: 0; y: -100; z: 0;
 	handleRotation: 'false'; rot: 0; `"

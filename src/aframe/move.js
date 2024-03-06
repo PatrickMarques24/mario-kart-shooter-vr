@@ -1,4 +1,4 @@
-import { goombaKilled } from "../store/game.js";
+import { goombaKilled, gameFinished } from "../store/game.js";
 
 AFRAME.registerComponent("move", {
 	schema: {
@@ -8,56 +8,42 @@ AFRAME.registerComponent("move", {
 		const cameraRig = document.querySelector("#camera-rig");
 		const head = document.querySelector("#head");
 
-		this.data.posZ = 0;
+		let position = this.el.object3D.position;
+		let rotation = this.el.object3D.rotation;
 
-		// If we arent in VR, change the position of the camera
-		// It's not allowed to move the camera in VR
-		if (!AFRAME.utils.device.checkHeadsetConnected()) {
-			head.setAttribute("position", `0 0.8 -0.2`);
-		}
+		this.data.posZ = position.z;
 
-		// If we are in VR
-		if (AFRAME.utils.device.checkHeadsetConnected()) {
-			// cameraRig.setAttribute("position", `0 0 -0.2`);
-		}
-
-		if (this.el.getAttribute("id") === "mykart") {
-			this.el.setAttribute("position", `0 0.274 0`);
-			this.el.setAttribute("rotation", `0 180 0`);
-		}
-
-		// Disable WASD controls
-		cameraRig.removeAttribute("movement-controls");
+		this.el.setAttribute("position", `${position.x} ${position.y} ${position.z}`);
+		this.el.setAttribute(
+			"rotation",
+			`${THREE.MathUtils.radToDeg(rotation.x)} ${THREE.MathUtils.radToDeg(
+				rotation.y
+			)} ${THREE.MathUtils.radToDeg(rotation.z)}`
+		);
 	},
 	tick: function () {
 		const cameraRig = document.querySelector("#camera-rig");
 		const scorePlane = document.querySelector("#score-plane");
 		const scoreText = document.querySelector("#score-text");
+
+		let position = this.el.object3D.position;
 		setTimeout(() => {
 			if (this.data.posZ > -53) {
-				this.data.posZ -= 0.02;
-				// this.data.posZ -= 1;
+				// this.data.posZ -= 0.02;
+				this.data.posZ -= 1;
 
-				// If we arent in VR, alert "hello non-VR"
-				if (!AFRAME.utils.device.checkHeadsetConnected()) {
-					cameraRig.setAttribute("position", `0 0.8 ${this.data.posZ - 0.2}`);
-				}
-
-				// If we are in VR, alert "hello VR"
-				if (AFRAME.utils.device.checkHeadsetConnected()) {
-					cameraRig.setAttribute("position", `0 0 ${this.data.posZ - 0.2}`);
-				}
-
-				// if its the kart, its other position
-				if (this.el.getAttribute("id") === "mykart") {
-					this.el.setAttribute("position", `0 0.274 ${this.data.posZ}`);
-				}
+				// Change the Z position
+				this.el.setAttribute(
+					"position",
+					`${position.x} ${position.y} ${this.data.posZ}`
+				);
 			} else {
+				// gameFinished.value = true;
+				// alert(gameFinished.value);
 				// We cannot more shoot the goombas
 				document.querySelectorAll(".goombas").forEach((goomba) => {
 					goomba.removeAttribute("clickable");
 				});
-
 				cameraRig.setAttribute("movement-controls", "camera: #head;");
 				cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
 				scoreText.setAttribute(
@@ -69,7 +55,6 @@ AFRAME.registerComponent("move", {
 					}!`
 				);
 				scorePlane.setAttribute("visible", "true");
-
 				document.querySelector("#camera-rig").removeAttribute("bind-position");
 				// document.querySelector("#restart-plane").setAttribute("visible", "true");
 			}
