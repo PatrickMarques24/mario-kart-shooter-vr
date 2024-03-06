@@ -29,7 +29,7 @@ if (AFRAME.utils.device.checkHeadsetConnected()) {
 </script>
 
 <template>
-	<a-box height="5" width="8" depth="8" position="0 -97.5 0" color="black">
+	<a-entity height="5" width="8" depth="8" position="0 -97.5 0">
 		<a-text
 			value="In this game, you need to throw items on the goombas to get points. You can grab items by clicking on them, the difficulty will change the amount of items available to throw. Good luck!"
 			position="0 0 -3"
@@ -111,7 +111,7 @@ if (AFRAME.utils.device.checkHeadsetConnected()) {
 			width="1.5"
 			side="double"
 		></a-text>
-	</a-box>
+	</a-entity>
 
 	<a-ocean
 		color="#00AAFF"

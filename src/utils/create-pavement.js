@@ -1,5 +1,7 @@
-import { grabTheThing } from "./grab-and-drop.js";
+// import { grabTheThing } from "./grab-and-drop.js";
 import { goombaKilled } from "../store/game.js";
+
+import "../aframe/simple-grab.js";
 
 export const createPavement = (
 	data,
@@ -76,7 +78,14 @@ export const createPavement = (
 
 				goomba.classList.add("goombas");
 
-				goomba.addEventListener("click", (e) => killGoomba(e));
+				goomba.addEventListener("click", (e) =>
+					killGoomba(
+						e,
+						x,
+						squareAltitude + data.square.height / 2,
+						j * (data.square.width + data.offset)
+					)
+				);
 
 				// goomba.setAttribute("simple-grab", "");
 				tileFloor.appendChild(goomba);
@@ -100,10 +109,46 @@ export const createPavement = (
 };
 
 function killGoomba(e, x, y, z) {
-	e.currentTarget.setAttribute(
-		"animation",
-		"property: scale; to: 0 0 0; dur: 500; easing: easeInSine; autoplay : true;"
-	);
+	// If the player has nothing grabbed in the hand, he cannot kill the goomba
+
+	// These animations are common to the position of the goomba (position are relative to the goomba)
+
+	// These animations are if the goomba is on the right side of the pavement (position are relative to the goomba)
+	if (x > 0) {
+		e.currentTarget.setAttribute(
+			"animation__2",
+			"property: rotation; to: -90 -90 0; dur: 500; autoplay : true;"
+		);
+
+		e.currentTarget.setAttribute(
+			"animation__3",
+			`property: position; to: ${0.6} ${y + 0.2} ${z}; dur: 250; autoplay : true;`
+		);
+		e.currentTarget.setAttribute(
+			"animation__4",
+			`property: position; to: ${0.6} ${0.2} ${z}; dur: 250; startEvents: animationcomplete`
+		);
+	} else {
+		// 	// These animations are if the goomba is on the left side of the pavement (position are relative to the goomba)
+		e.currentTarget.setAttribute(
+			"animation__2",
+			"property: rotation; to: -90 90 0; dur: 500; autoplay : true;"
+		);
+		e.currentTarget.setAttribute(
+			"animation__3",
+			`property: position; to: ${-0.6} ${y + 0.2} ${z}; dur: 250; autoplay : true;`
+		);
+		e.currentTarget.setAttribute(
+			"animation__4",
+			`property: position; to: ${-0.6} ${0.2} ${z}; dur: 250; startEvents: animationcomplete`
+		);
+	}
+
+	// e.currentTarget.setAttribute(
+	// 	"animation__5",
+	// 	"property: scale; to: 0 0 0; dur: 500; autoplay : true;"
+	// );
+
 	goombaKilled.value++;
 	setTimeout(() => {
 		e.currentTarget.remove();

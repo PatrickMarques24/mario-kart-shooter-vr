@@ -59,19 +59,19 @@ watch(gameDiff, (difficulty) => {
 		case "easy":
 			numberOfBananas = 15;
 			numberOfRedShells = 15;
-			numberOfStars = 15;
+			numberOfStars = 10;
 			loaded.value = true;
 			break;
 		case "medium":
 			numberOfBananas = 10;
 			numberOfRedShells = 10;
-			numberOfStars = 10;
+			numberOfStars = 5;
 			loaded.value = true;
 			break;
 		case "hard":
 			numberOfBananas = 5;
 			numberOfRedShells = 5;
-			numberOfStars = 5;
+			numberOfStars = 2;
 			loaded.value = true;
 			break;
 		default:
@@ -207,14 +207,17 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 	>
 	</a-entity>
 
-	<a-plane
+	<!-- If I can make the proximity trigger work, I can trigger the end of the game when the kart reaches the end of the circuit, instead of using the end of the loop -->
+	<!-- <a-plane
 		position="0 0.01 -51.625"
 		rotation="-90 0 0"
 		width="5"
 		height="1"
 		color="#00AAFF"
 		visible="false"
-	></a-plane>
+	></a-plane> -->
+
+	<
 
 	<a-text
 		id="score-text"
