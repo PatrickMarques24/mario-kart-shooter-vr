@@ -48,6 +48,7 @@ function toggleMusic() {
 		gamePlay.setAttribute("sound", "volume : 0.4;");
 		victoryPlay.setAttribute("sound", "volume : 0.4;");
 		gameOverPlay.setAttribute("sound", "volume : 1;");
+		document.querySelector("#myradio").setAttribute("scale", "0.2 0.2 0.2");
 		document
 			.querySelector("#myradio")
 			.setAttribute(
