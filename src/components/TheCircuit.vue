@@ -27,6 +27,7 @@ import "../aframe/move.js";
 // Utils
 import { toggleFog } from "../utils/weather-and-time.js";
 import { createPavement } from "../utils/create-pavement.js";
+import { createGoombaPavement } from "../utils/create-goomba-pavement.js";
 import { positionOnLeftAndRightTheMiddleLane } from "../utils/position-on-lane.js";
 
 // Components
@@ -182,8 +183,8 @@ toggleFog(true, "00AAFF", 20, 40);
 createPavement(startSquare, -2.39, 0.025, -2);
 createPavement(startSquare, -2.39, 0.025, -52);
 createPavement(roadSquare, -2.015, 0, -26.625);
-createPavement(targetBoxes, -3.5, 0, -51.625, -0.25, 0.25, true);
-createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
+createGoombaPavement(targetBoxes, -3.5, 0, -51.625, -0.25, 0.25, true);
+createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 </script>
 
 <template>
