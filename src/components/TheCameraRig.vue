@@ -11,7 +11,7 @@ import "../aframe/physx-grab.js";
 		id="camera-rig"
 		movement-controls="camera: #head;"
 		disable-in-vr="component: movement-controls;"
-		position="0 0 0"
+		position="0 -100 0"
 	>
 		<a-entity
 			id="head"
