@@ -49,26 +49,48 @@ const scoreText = document.querySelector("#score-text");
 
 const loaded = ref(false);
 
+import { grabbedItem } from "../store/game.js";
+
+watch(grabbedItem, (item) => {
+	if (item === "banana") {
+		// Play the banana sound
+		document.querySelector("#banana-sound").components.sound.playSound();
+	}
+	if (item === "red-shell") {
+		// Play the red shell sound
+		document.querySelector("#red-shell-sound").components.sound.playSound();
+	}
+	if (item === "star") {
+		// Play the star sound
+		document.querySelector("#star-sound").components.sound.playSound();
+	}
+});
+
 watch(gameFinished, (finished) => {
-	// alert(finished);
-	// if (finished) {
-	// document.querySelectorAll(".goombas").forEach((goomba) => {
-	// 	goomba.removeAttribute("clickable");
-	// });
-	// cameraRig.setAttribute("movement-controls", "camera: #head;");
-	// cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
-	// scoreText.setAttribute(
-	// 	"value",
-	// 	`${
-	// 		goombaKilled.value > 0 ? "Congratulations ! 🏆" : "Oh no :("
-	// 	} \n You killed ${goombaKilled.value} ${
-	// 		goombaKilled.value > 1 ? "goombas" : "goomba"
-	// 	}!`
-	// );
-	// scorePlane.setAttribute("visible", "true");
-	// document.querySelector("#camera-rig").removeAttribute("bind-position");
-	// document.querySelector("#restart-plane").setAttribute("visible", "true");
-	// }
+	// I need to declare again  because the watch function is not reactive
+	const cameraRig = document.querySelector("#camera-rig");
+	const scorePlane = document.querySelector("#score-plane");
+	const scoreText = document.querySelector("#score-text");
+
+	if (finished) {
+		document.querySelectorAll(".goombas").forEach((goomba) => {
+			goomba.removeAttribute("clickable");
+		});
+		cameraRig.setAttribute("movement-controls", "camera: #head;");
+		cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
+		scoreText.setAttribute(
+			"value",
+			`Difficulty : ${gameDiff.value} \n
+			${
+				goombaKilled.value > 0
+					? `Congratulations ! 🏆 \n You hit ${goombaKilled.value}`
+					: "Oh no :( \n You didn't touch any"
+			} ${goombaKilled.value > 1 ? "goombas" : "goomba"}!`
+		);
+		scorePlane.setAttribute("visible", "true");
+		document.querySelector("#camera-rig").removeAttribute("bind-position");
+		// document.querySelector("#restart-plane").setAttribute("visible", "true");
+	}
 });
 
 watch(gameDiff, (difficulty) => {
@@ -274,7 +296,6 @@ createPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		height="0.5"
 		width="1.5"
 		color="red"
-		clickable
 		visible="false"
 		:teleport-camera-rig="` x: 0; y: -100; z: 0;
 	handleRotation: 'false'; rot: 0; `"

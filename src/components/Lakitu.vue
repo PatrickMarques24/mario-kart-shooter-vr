@@ -25,7 +25,7 @@ defineProps({
 		>
 			<a-text
 				id="lakitu-text"
-				value="Enter in the kart"
+				value="Click on the kart"
 				color="black"
 				align="center"
 				baseline="center"

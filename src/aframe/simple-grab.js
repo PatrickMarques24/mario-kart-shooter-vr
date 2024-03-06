@@ -1,5 +1,6 @@
 import { copyPosition, copyRotation } from "../utils/aframe.js";
 import Keyboard from "../utils/keyboard.js";
+import { grabbedItem } from "../store/game.js";
 
 AFRAME.registerSystem("simple-grab", {
 	schema: {
@@ -27,6 +28,8 @@ AFRAME.registerSystem("simple-grab", {
 
 	setCurrentGrab: function (hand, el) {
 		this.currentGrab.set(hand, el);
+		el.setAttribute("class", "grabbed");
+		grabbedItem.value = el;
 	},
 
 	getCurrentGrab: function (hand) {

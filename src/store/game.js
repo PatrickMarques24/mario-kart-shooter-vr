@@ -6,6 +6,8 @@ export const gameFinished = ref(false);
 
 export const goombaKilled = ref(0);
 
+export const grabbedItem = ref(null);
+
 export const startSquare = {
 	rows: 4,
 	cols: 20,

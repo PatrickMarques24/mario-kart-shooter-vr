@@ -1,7 +1,7 @@
 // import { grabTheThing } from "./grab-and-drop.js";
-import { goombaKilled } from "../store/game.js";
+import { goombaKilled, grabbedItem } from "../store/game.js";
 
-import "../aframe/simple-grab.js";
+// import "../aframe/simple-grab.js";
 
 export const createPavement = (
 	data,
@@ -110,7 +110,19 @@ export const createPavement = (
 
 function killGoomba(e, x, y, z) {
 	// If the player has nothing grabbed in the hand, he cannot kill the goomba
+	if (!grabbedItem.value) return;
 
+	// Say the player we have nothing more in the hand
+	grabbedItem.value = null;
+	// grabbedItem.value.remove();
+
+	// Hide the grabbed item if the player hit the goomba (remove don't work)
+	const grabbedItemDOM = document.querySelectorAll(".grabbed");
+	grabbedItemDOM.forEach((item) => {
+		item.setAttribute("visible", "false");
+	});
+
+	// grabbedItem.remove();
 	// These animations are common to the position of the goomba (position are relative to the goomba)
 
 	// These animations are if the goomba is on the right side of the pavement (position are relative to the goomba)
@@ -150,7 +162,7 @@ function killGoomba(e, x, y, z) {
 	// );
 
 	goombaKilled.value++;
-	setTimeout(() => {
-		e.currentTarget.remove();
-	}, 500);
+	// setTimeout(() => {
+	// 	e.currentTarget.remove();
+	// }, 500);
 }
