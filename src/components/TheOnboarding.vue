@@ -168,6 +168,18 @@ const asset3D = [
 		modifications:
 			"A white board has been added to allow Lakitu to display text.",
 	},
+	{
+		name: "Project Zomboid - Radio",
+		link: "https://skfb.ly/oPvCA",
+		author: {
+			name: "Phartam",
+			link: "https://sketchfab.com/Phartam",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+	},
 ];
 
 // Définition des audios inclus

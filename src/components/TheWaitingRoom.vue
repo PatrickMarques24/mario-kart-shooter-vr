@@ -1,12 +1,16 @@
 <script setup>
-import { vModelRadio } from "vue";
+import Radio from "./Radio.vue";
 import "../aframe/clickable.js";
 import "../aframe/teleport-camera-rig.js";
 import { gameDiff } from "../store/game.js";
 
-function changeDifficulty(difficulty) {
-	gameDiff.value = difficulty;
-}
+const theme = document.querySelector("#theme-music-play");
+const start = document.querySelector("#start");
+const gamePlay = document.querySelector("#game-play");
+const victoryPlay = document.querySelector("#victory-play");
+const gameOverPlay = document.querySelector("#game-over-play");
+
+const myradio = document.querySelector("#myradio");
 
 let coordonnees = `
   x: 0;
@@ -29,14 +33,12 @@ if (AFRAME.utils.device.checkHeadsetConnected()) {
 
 let music = true;
 
+function changeDifficulty(difficulty) {
+	gameDiff.value = difficulty;
+}
+
 function toggleMusic() {
 	music = !music;
-
-	const theme = document.querySelector("#theme-music-play");
-	const start = document.querySelector("#start");
-	const gamePlay = document.querySelector("#game-play");
-	const victoryPlay = document.querySelector("#victory-play");
-	const gameOverPlay = document.querySelector("#game-over-play");
 
 	const allMusic = [theme, start, gamePlay, victoryPlay, gameOverPlay];
 
@@ -44,12 +46,21 @@ function toggleMusic() {
 		theme.setAttribute("sound", "volume : 0.4;");
 		start.setAttribute("sound", "volume : 1;");
 		gamePlay.setAttribute("sound", "volume : 0.4;");
-		victoryPlay.setAttribute("sound", "volume : 0.5;");
+		victoryPlay.setAttribute("sound", "volume : 0.4;");
 		gameOverPlay.setAttribute("sound", "volume : 1;");
+		document
+			.querySelector("#myradio")
+			.setAttribute(
+				"animation",
+				"property: scale; to: 0.22 0.22 0.22; dur: 250; dir: alternate; loop: true"
+			);
 	} else {
 		allMusic.forEach((music) => {
 			music.setAttribute("sound", "volume: 0;");
 		});
+
+		// I don't know why, but if I put myradio.removeAt... it doesn't work
+		document.querySelector("#myradio").removeAttribute("animation");
 	}
 }
 </script>
@@ -58,7 +69,7 @@ function toggleMusic() {
 	<a-entity height="5" width="8" depth="8" position="0 -97.5 0">
 		<a-text
 			value="In this game, you need to throw items on the goombas to get points. You can grab items by clicking on them, the difficulty will change the amount of items available to throw. Good luck!"
-			position="0 0 -3"
+			position="0 0 -3.25"
 			rotation="0 0 0"
 			color="black"
 			align="center"
@@ -74,7 +85,7 @@ function toggleMusic() {
 			height="0.5"
 			depth="0.5"
 			color="#AAFFAA"
-			position="-1 -1.3 -3"
+			position="-1 -1.3 -3.25"
 			clickable
 			@click="changeDifficulty('easy')"
 			visible="true"
@@ -82,7 +93,7 @@ function toggleMusic() {
 		></a-box>
 		<a-text
 			value="Easy"
-			position="-1 -1.3 -2.75"
+			position="-1 -1.3 -3"
 			rotation="0 0 0"
 			color="#FFF"
 			align="center"
@@ -98,7 +109,7 @@ function toggleMusic() {
 			height="0.5"
 			depth="0.5"
 			color="#AAAAFF"
-			position="0 -1.3 -3"
+			position="0 -1.3 -3.25"
 			clickable
 			@click="changeDifficulty('medium')"
 			visible="true"
@@ -106,7 +117,7 @@ function toggleMusic() {
 		></a-box>
 		<a-text
 			value="Medium"
-			position="0 -1.3 -2.75"
+			position="0 -1.3 -3"
 			rotation="0 0 0"
 			color="#FFF"
 			align="center"
@@ -122,7 +133,7 @@ function toggleMusic() {
 			height="0.5"
 			depth="0.5"
 			color="#FF5555"
-			position="1 -1.3 -3"
+			position="1 -1.3 -3.25"
 			clickable
 			@click="changeDifficulty('hard')"
 			visible="true"
@@ -130,32 +141,9 @@ function toggleMusic() {
 		></a-box>
 		<a-text
 			value="Hard"
-			position="1 -1.3 -2.75"
+			position="1 -1.3 -3"
 			rotation="0 0 0"
 			color="#FFF"
-			align="center"
-			width="1.5"
-			side="double"
-		></a-text>
-
-		<!-- Sound -->
-		<a-box
-			opacity="0.8"
-			side="double"
-			width="3"
-			height="0.5"
-			depth="0.5"
-			color="white"
-			position="0 -2.3 -3"
-			clickable
-			@click="toggleMusic()"
-			visible="true"
-		></a-box>
-		<a-text
-			value="Toggle sound"
-			position="0 -2.3 -2.75"
-			rotation="0 0 0"
-			color="#000"
 			align="center"
 			width="1.5"
 			side="double"
@@ -192,6 +180,18 @@ function toggleMusic() {
 		amplitudeVariance="0.05"
 		amplitude="0"
 	></a-ocean>
+
+	<Radio
+		id="myradio"
+		:x="1"
+		:y="-100"
+		:z="-2"
+		scale="0.2 0.2 0.2"
+		rotation="0 -115 0"
+		@click="toggleMusic"
+		clickable
+		animation="property: scale; to: 0.22 0.22 0.22; dur: 250; dir: alternate; loop: true"
+	/>
 
 	<a-entity
 		gltf-model="#circuit"

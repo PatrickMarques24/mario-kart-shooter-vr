@@ -224,7 +224,7 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 	></a-entity>
 	<a-entity
 		id="game-over-play"
-		sound="src: #game-over-music; autoplay: false; loop: false; volume : 1;"
+		sound="src: #game-over-music; autoplay: false; loop: true; volume : 1;"
 		bind-position="target: #head"
 	>
 	</a-entity>
@@ -235,7 +235,7 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 	></a-entity>
 	<a-entity
 		id="victory-play"
-		sound="src: #victory-music; autoplay: false; loop: false; volume : 0.5;"
+		sound="src: #victory-music; autoplay: false; loop: false; volume : 0.4;"
 		bind-position="target: #head"
 	></a-entity>
 

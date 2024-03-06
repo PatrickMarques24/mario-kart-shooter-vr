@@ -8,8 +8,7 @@ defineProps({
 
 <template>
 	<a-entity
-		gltf-model="#goomba"
-		scale="1 1.007 1.007"
+		gltf-model="#radio"
 		:position="`${x} ${y} ${z}`"
 		rotation="0 0 0"
 	></a-entity>
