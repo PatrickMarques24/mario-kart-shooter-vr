@@ -3,14 +3,14 @@ export const createPavement = (
 	x = 0,
 	y = 0,
 	z = 0,
-	min = 0,
-	max = 0,
+	minHeight = 0,
+	maxHeight = 0,
 	iPutGoombaOnIt = false
 ) => {
 	const tileFloor = document.createElement("a-entity");
 	for (let i = 0; i < data.cols; i++) {
 		for (let j = 0; j < data.rows; j++) {
-			let squareAltitude = Math.random() * (max - min) + min;
+			let squareAltitude = Math.random() * (maxHeight - minHeight) + minHeight;
 
 			const myTile = document.createElement("a-box");
 			myTile.setAttribute("width", data.square.width);

@@ -53,45 +53,18 @@ const loaded = ref(false);
 import { grabbedItem } from "../store/game.js";
 
 watch(grabbedItem, (item) => {
-	if (item === "banana") {
-		// Play the banana sound
-		document.querySelector("#banana-sound").components.sound.playSound();
-	}
-	if (item === "red-shell") {
-		// Play the red shell sound
-		document.querySelector("#red-shell-sound").components.sound.playSound();
-	}
-	if (item === "star") {
-		// Play the star sound
-		document.querySelector("#star-sound").components.sound.playSound();
-	}
-});
-
-watch(gameFinished, (finished) => {
-	// I need to declare again  because the watch function is not reactive
-	const cameraRig = document.querySelector("#camera-rig");
-	const scorePlane = document.querySelector("#score-plane");
-	const scoreText = document.querySelector("#score-text");
-
-	if (finished) {
-		document.querySelectorAll(".goombas").forEach((goomba) => {
-			goomba.removeAttribute("clickable");
-		});
-		cameraRig.setAttribute("movement-controls", "camera: #head;");
-		cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
-		scoreText.setAttribute(
-			"value",
-			`Difficulty : ${gameDiff.value} \n
-			${
-				goombaKilled.value > 0
-					? `Congratulations ! 🏆 \n You hit ${goombaKilled.value}`
-					: "Oh no :( \n You didn't touch any"
-			} ${goombaKilled.value > 1 ? "goombas" : "goomba"}!`
-		);
-		scorePlane.setAttribute("visible", "true");
-		document.querySelector("#camera-rig").removeAttribute("bind-position");
-		// document.querySelector("#restart-plane").setAttribute("visible", "true");
-	}
+	// if (item === "banana") {
+	// 	// Play the banana sound
+	// 	document.querySelector("#banana-sound").components.sound.playSound();
+	// }
+	// if (item === "red-shell") {
+	// 	// Play the red shell sound
+	// 	document.querySelector("#red-shell-sound").components.sound.playSound();
+	// }
+	// if (item === "star") {
+	// 	// Play the star sound
+	// 	document.querySelector("#star-sound").components.sound.playSound();
+	// }
 });
 
 watch(gameDiff, (difficulty) => {
@@ -114,6 +87,9 @@ watch(gameDiff, (difficulty) => {
 	lakituText.setAttribute("value", "3");
 	lakituText.setAttribute("scale", "0.2 0.2 0.2");
 
+	// We begin the countdown
+	// Play the countdown
+	document.querySelector("#start").components.sound.playSound();
 	setTimeout(() => {
 		lakituText.setAttribute("value", "2");
 	}, 1500);
@@ -134,7 +110,13 @@ watch(gameDiff, (difficulty) => {
 				"property: scale; to: 0 0 0; dur: 2000; easing: easeInOutQuad; delay: 500"
 			);
 	}, 2500);
-	// document.querySelector("#head").setAttribute("move", "");
+
+	// Play the game music 500 ms after the countdown finish (so delay 3000) and pause the main theme
+	setTimeout(() => {
+		document.querySelector("#game-play").components.sound.playSound();
+		document.querySelector("#theme-music-play").components.sound.pauseSound();
+	}, 3000);
+
 	document.querySelector("#mykart").setAttribute("move", "");
 	document.querySelector("#mykart").removeAttribute("clickable");
 	document
@@ -147,8 +129,6 @@ watch(gameDiff, (difficulty) => {
 		// goomba.setAttribute("simple-grab", "");
 	});
 	// document.querySelector(".camera-container").setAttribute("move", "");
-	// Play the countdown
-	document.querySelector("#start").components.sound.playSound();
 	// alert(difficulty);
 	switch (difficulty) {
 		case "easy":
@@ -178,6 +158,49 @@ watch(gameDiff, (difficulty) => {
 	}
 });
 
+watch(gameFinished, (finished) => {
+	// I need to declare again  because the watch function is not reactive
+	const cameraRig = document.querySelector("#camera-rig");
+	const scorePlane = document.querySelector("#score-plane");
+	const scoreText = document.querySelector("#score-text");
+	const gamePlay = document.querySelector("#game-play");
+	const victoryPlay = document.querySelector("#victory-play");
+	const gameOverPlay = document.querySelector("#game-over-play");
+
+	if (finished) {
+		// Music part
+
+		gamePlay.components.sound.pauseSound();
+
+		// If the player killed at least one goomba, play the victory music, else play the game over music
+		if (goombaKilled.value > 0) {
+			victoryPlay.components.sound.playSound();
+		} else {
+			gameOverPlay.components.sound.playSound();
+		}
+
+		// End of music part
+
+		document.querySelectorAll(".goombas").forEach((goomba) => {
+			goomba.removeAttribute("clickable");
+		});
+		cameraRig.setAttribute("movement-controls", "camera: #head;");
+		cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
+		scoreText.setAttribute(
+			"value",
+			`Difficulty : ${gameDiff.value} \n
+			${
+				goombaKilled.value > 0
+					? `Congratulations ! 🏆 \n You hit ${goombaKilled.value}`
+					: "Oh no :( \n You didn't touch any"
+			} ${goombaKilled.value > 1 ? "goombas" : "goomba"}!`
+		);
+		scorePlane.setAttribute("visible", "true");
+		document.querySelector("#camera-rig").removeAttribute("bind-position");
+		// document.querySelector("#restart-plane").setAttribute("visible", "true");
+	}
+});
+
 toggleFog(true, "00AAFF", 20, 40);
 
 createPavement(startSquare, -2.39, 0.025, -2);
@@ -197,6 +220,22 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		id="start"
 		sound="src: #start-sound; autoplay: false; loop: false; volume : 1;"
 		position="0 0.8 -0.2"
+		bind-position="target: #head"
+	></a-entity>
+	<a-entity
+		id="game-over-play"
+		sound="src: #game-over-music; autoplay: false; loop: false; volume : 1;"
+		bind-position="target: #head"
+	>
+	</a-entity>
+	<a-entity
+		id="game-play"
+		sound="src: #game-music; autoplay: false; loop: true; volume : 0.4;"
+		bind-position="target: #head"
+	></a-entity>
+	<a-entity
+		id="victory-play"
+		sound="src: #victory-music; autoplay: false; loop: false; volume : 0.5;"
 		bind-position="target: #head"
 	></a-entity>
 

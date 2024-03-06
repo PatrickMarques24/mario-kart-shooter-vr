@@ -34,19 +34,22 @@ function toggleMusic() {
 
 	const theme = document.querySelector("#theme-music-play");
 	const start = document.querySelector("#start");
+	const gamePlay = document.querySelector("#game-play");
+	const victoryPlay = document.querySelector("#victory-play");
+	const gameOverPlay = document.querySelector("#game-over-play");
+
+	const allMusic = [theme, start, gamePlay, victoryPlay, gameOverPlay];
 
 	if (music) {
-		theme.setAttribute(
-			"sound",
-			"src: #theme-music; autoplay: true; loop: true; volume : 0.4;"
-		);
-		start.setAttribute("sound", "src: #start-sound; loop: false; volume : 1;");
+		theme.setAttribute("sound", "volume : 0.4;");
+		start.setAttribute("sound", "volume : 1;");
+		gamePlay.setAttribute("sound", "volume : 0.4;");
+		victoryPlay.setAttribute("sound", "volume : 0.5;");
+		gameOverPlay.setAttribute("sound", "volume : 1;");
 	} else {
-		theme.setAttribute(
-			"sound",
-			"src: #theme-music; autoplay: true; loop: true; volume : 0;"
-		);
-		start.setAttribute("sound", "src: #start-sound;  loop: false; volume : 0;");
+		allMusic.forEach((music) => {
+			music.setAttribute("sound", "volume: 0;");
+		});
 	}
 }
 </script>

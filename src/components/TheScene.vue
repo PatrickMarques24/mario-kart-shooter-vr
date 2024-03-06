@@ -61,6 +61,24 @@ const allAssetsLoaded = ref(false);
 				src="assets/sounds/start.mp3"
 				preload="auto"
 			></a-asset-item>
+			<a-asset-item
+				id="game-over-music"
+				src="assets/sounds/game-over.mp3"
+				response-type="arraybuffer"
+				preload="auto"
+			></a-asset-item>
+			<a-asset-item
+				id="game-music"
+				src="assets/sounds/the-fun-run.mp3"
+				response-type="arraybuffer"
+				preload="auto"
+			></a-asset-item>
+			<a-asset-item
+				id="victory-music"
+				src="assets/sounds/victory.mp3"
+				response-type="arraybuffer"
+				preload="auto"
+			></a-asset-item>
 
 			<!-- Images -->
 			<!--<img

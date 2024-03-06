@@ -22,7 +22,7 @@ AFRAME.registerComponent("move", {
 		let position = this.el.object3D.position;
 		setTimeout(() => {
 			if (this.data.posZ > -53) {
-				this.data.posZ -= 0.02;
+				this.data.posZ -= 0.0175;
 
 				// For development purpose (to test the end of the game faster)
 				// this.data.posZ -= 1;

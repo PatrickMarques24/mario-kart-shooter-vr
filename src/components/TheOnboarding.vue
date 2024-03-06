@@ -17,15 +17,261 @@ function enterScene() {
 	}
 	document.querySelector("#theme-music-play").components.sound.playSound();
 }
+
+// Définition des technologies incluses
+const technologyAssets = [
+	{
+		name: "aframe-extras controls and animation-mixer",
+		link: "https://github.com/c-frame/aframe-extras",
+		license: {
+			name: "MIT License",
+			link: "https://github.com/c-frame/aframe-extras/blob/master/LICENSE",
+		},
+		modifications: null,
+	},
+	{
+		name: "aframe physx",
+		link: "https://github.com/c-frame/physx",
+		license: {
+			name: "MIT License",
+			link: "https://github.com/c-frame/aframe-extras/blob/master/LICENSE",
+		},
+		modifications: null,
+	},
+	{
+		name: "aframe-blink-controls",
+		link: "https://github.com/jure/aframe-blink-controls/",
+		license: {
+			name: "MIT License",
+			link: "https://github.com/jure/aframe-blink-controls/blob/main/LICENSE",
+		},
+		modifications: null,
+	},
+	{
+		name: "simple-navmesh-constraint",
+		link: "https://github.com/AdaRoseCannon/aframe-xr-boilerplate",
+		author: "Ada Rose Cannon",
+		authorLink: "https://github.com/AdaRoseCannon",
+		license: {
+			name: "MIT License",
+			link:
+				"https://github.com/AdaRoseCannon/aframe-xr-boilerplate/blob/glitch/LICENSE",
+		},
+	},
+];
+
+// Définition des assets 3D inclus
+const asset3D = [
+	{
+		name: "Go Kart",
+		link: "https://skfb.ly/6TuMD",
+		author: {
+			name: "Samuel Thomas",
+			link: "https://sketchfab.com/SamuelTea",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+
+		modifications: null,
+	},
+	{
+		name: "Banana Peel (Mario Kart)",
+		link: "https://skfb.ly/6EvGw",
+		author: {
+			name: "Yanez Designs",
+			link: "https://sketchfab.com/Yanez-Designs",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications: null,
+	},
+	{
+		name: "Red Koopa Troopa Shell (Super Mario Bros)",
+		link: "https://skfb.ly/6zRWI",
+		author: {
+			name: "Yanez Designs",
+			link: "https://sketchfab.com/Yanez-Designs",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications: null,
+	},
+	{
+		name: "super mario star",
+		link: "https://skfb.ly/oyQUJ",
+		author: {
+			name: "gaelinix",
+			link: "https://sketchfab.com/gaelinix",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications: null,
+	},
+	{
+		name: "Goomba",
+		link: "https://skfb.ly/oLEQV",
+		author: {
+			name: "tirrellclark.75",
+			link: "https://sketchfab.com/tirrellclark.75",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications: null,
+	},
+	{
+		name: "Brick Block (Super Mario Bros)",
+		link: "https://skfb.ly/6zQG9",
+		author: {
+			name: "Yanez Designs",
+			link: "https://sketchfab.com/Yanez-Designs",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications: null,
+	},
+	{
+		name: "DS DSi - Mario Kart DS - Mario Circuit",
+		link: "https://skfb.ly/optKO",
+		author: {
+			name: "lonewolf1898",
+			link: "https://sketchfab.com/lonewolf1898",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications: "Finish line removed and replaced with road texture.",
+	},
+	{
+		name: "Lakitu",
+		link: "https://skfb.ly/oBoZp",
+		author: {
+			name: "Xen",
+			link: "https://sketchfab.com/XenMC",
+		},
+		license: {
+			name: "CC BY 4.0",
+			link: "https://creativecommons.org/licenses/by/4.0/",
+		},
+		modifications:
+			"A white board has been added to allow Lakitu to display text.",
+	},
+];
+
+// Définition des audios inclus
+const audioAssets = [
+	{
+		name: "Countdown",
+		link: "https://opengameart.org/content/countdown",
+		author: {
+			name: "qubodup",
+			link: "https://opengameart.org/users/qubodup",
+		},
+		license: {
+			name: "CC BY 3.0",
+			link: "https://creativecommons.org/licenses/by/3.0/",
+		},
+		modifications:
+			"Added the files together in the following order: countdown-a, countdown-a, countdown-b.",
+	},
+	{
+		name: "Starfishario",
+		link: "https://opengameart.org/content/starfishario",
+		author: {
+			name: "iamoneabe",
+			link: "https://opengameart.org/users/iamoneabe",
+		},
+		license: {
+			name: "CC 0",
+			link: "https://creativecommons.org/publicdomain/zero/1.0/",
+		},
+		modifications: null,
+	},
+	{
+		name: "Victory!",
+		link: "https://opengameart.org/content/victory-1",
+		author: {
+			name: "Viktor Kraus",
+			link: "https://opengameart.org/users/viktor-kraus",
+		},
+		license: {
+			name: "CC BY 3.0",
+			link: "https://creativecommons.org/licenses/by/3.0/",
+		},
+		modifications: "Cut to 2:38, fade in at the beginning.",
+	},
+	{
+		name: "The Fun Run! - Day 3",
+		link: "https://opengameart.org/content/the-fun-run-day-3",
+		author: {
+			name: "Zane Little Music",
+			link: "https://opengameart.org/users/zane-little-music",
+		},
+		license: {
+			name: "CC 0",
+			link: "https://creativecommons.org/publicdomain/zero/1.0/",
+		},
+		modifications: "Cut to 1:10.",
+	},
+	{
+		name: "Game Over",
+		link: "https://opengameart.org/content/game-over",
+		author: {
+			name: "Kistol",
+			link: "https://opengameart.org/users/kistol",
+		},
+		license: {
+			name: "CC 0",
+			link: "https://creativecommons.org/publicdomain/zero/1.0/",
+		},
+		modifications: "Cut by 0.4 second.",
+	},
+];
+
+const imageAssets = [
+	{
+		name: "les frères Mario",
+		link: "https://www.favicon.cc/?action=icon&file_id=137640",
+		author: {
+			name: "marcojetson",
+			link: "https://www.favicon.cc/?action=icon_list&user_id=36881",
+		},
+		license: {
+			name: "CC 0",
+			link: "https://creativecommons.org/publicdomain/zero/1.0/",
+		},
+		modifications: "Added a VR headset to Mario's head and two controllers.",
+	},
+];
 </script>
 
 <template>
 	<div id="onboarding" v-if="showOnboarding">
 		<div>
-			<h1>Mario Kart VR</h1>
+			<h1>Mario Kart Shooter VR</h1>
 			<p v-if="!loaded">loading...</p>
 			<button v-if="loaded" @click="enterScene()">Enter scene</button>
 			<div class="licences">
+				<section>
+					<h1 class="warning">Warning</h1>
+					<p class="warning">
+						For the best VR experience, it's recommended to use a low chair or sit
+						comfortably on the ground. Avoid standing up or sitting down while wearing
+						the headset.
+					</p>
+				</section>
 				<section>
 					<h4>Movement modes support</h4>
 					<ul>
@@ -45,238 +291,95 @@ function enterScene() {
 				</section>
 				<dl>
 					<dt>
-						<p class="asset-type">Included technologies</p>
+						<p v-if="technologyAssets.length == 1" class="asset-type">
+							Included technology
+						</p>
+						<p v-if="technologyAssets.length > 1" class="asset-type">
+							Included technologies
+						</p>
 					</dt>
-					<dt>
-						<a href="https://github.com/c-frame/aframe-extras" target="_blank"
-							>aframe-extras controls and animation-mixer</a
-						>
-					</dt>
-					<dd>
-						<a
-							href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE"
-							target="_blank"
-							>MIT License</a
-						>
-					</dd>
+					<template v-for="(asset, index) in technologyAssets" :key="index">
+						<dt>
+							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+						</dt>
+						<dd>
+							<a :href="asset.license.link" target="_blank">{{
+								asset.license.name
+							}}</a>
+							<template v-if="asset.author">
+								by <a :href="asset.authorLink" target="_blank">{{ asset.author }}</a>
+							</template>
+						</dd></template
+					>
 
 					<dt>
-						<a href="https://github.com/c-frame/physx" target="_blank"
-							>aframe physx</a
-						>
-					</dt>
-					<dd>
-						<a
-							href="https://github.com/c-frame/aframe-extras/blob/master/LICENSE"
-							target="_blank"
-							>MIT License</a
-						>
-					</dd>
-
-					<dt>
-						<a href="https://github.com/jure/aframe-blink-controls/" target="_blank"
-							>aframe-blink-controls</a
-						>
-					</dt>
-					<dd>
-						<a
-							href="https://github.com/jure/aframe-blink-controls/blob/main/LICENSE"
-							target="_blank"
-							>MIT License</a
-						>
-					</dd>
-
-					<dt>
-						<a
-							href=" https://github.com/AdaRoseCannon/aframe-xr-boilerplate"
-							target="_blank"
-							>simple-navmesh-constraint</a
-						>
-					</dt>
-					<dd>By Ada Rose Cannon under MIT License</dd>
-
-					<dt>
-						<a
-							href="https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1"
-							target="_blank"
-							>Physic room model</a
-						>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/tekuto1s" target="_blank">tekuto1s</a>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-
-					<dt>
-						<p class="asset-type">Included 3D assets</p>
-					</dt>
-					<dt>
-						<a href="https://skfb.ly/6TuMD" target="_blank">Go Kart</a>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/SamuelTea" target="_blank"
-							>Samuel Thomas</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-
-					<dt>
-						<a href="https://skfb.ly/6EvGw" target="_blank"
-							>Banana Peel (Mario Kart)</a
-						>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
-							>Yanez Designs</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-
-					<dt>
-						<a href="https://skfb.ly/6zRWI" target="_blank"
-							>Red Koopa Troopa Shell (Super Mario Bros)</a
-						>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
-							>Yanez Designs</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-
-					<dt>
-						<a href="https://skfb.ly/oyQUJ" target="_blank">super mario star</a>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/gaelinix" target="_blank">gaelinix</a>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-
-					<dt>
-						<a href="https://skfb.ly/oLEQV" target="_blank">Goomba</a>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/tirrellclark.75" target="_blank"
-							>tirrellclark.75</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-					<dt>
-						<a href="https://skfb.ly/6zQG9" target="_blank"
-							>Brick Block (Super Mario Bros)</a
-						>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/Yanez-Designs" target="_blank"
-							>Yanez Designs</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-
-					<dt>
-						<a href="https://skfb.ly/optKO" target="_blank"
-							>DS DSi - Mario Kart DS - Mario Circuit</a
-						>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/lonewolf1898" target="_blank"
-							>lonewolf1898</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-					<dd>
-						Modifications : Finish line removed and replaced with road texture.
-					</dd>
-
-					<dt>
-						<a href="https://skfb.ly/oBoZp" target="_blank">Lakitu</a>
-					</dt>
-					<dd>
-						by
-						<a href="https://sketchfab.com/XenMC" target="_blank">Xen</a>
-						under
-						<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-							>CC BY 4.0</a
-						>
-					</dd>
-					<dd>
-						Modifications : A white board has been added to allow Lakitu to display
-						text.
-					</dd>
-
-					<dt>
-						<p class="asset-type">Included audio</p>
+						<p v-if="asset3D.length == 1" class="asset-type">Included 3D asset</p>
+						<p v-if="asset3D.length > 1" class="asset-type">Included 3D assets</p>
 					</dt>
 
-					<dt>
-						<a href="https://opengameart.org/content/countdown" target="_blank"
-							>Countdown</a
-						>
-					</dt>
-					<dd>
-						by
-						<a href="https://opengameart.org/users/qubodup" target="_blank"
-							>qubodup</a
-						>
-						under
-						<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank"
-							>CC BY 3.0</a
-						>
-					</dd>
-					<dd>
-						Modifications : Added the files together in the following order:
-						countdown-a, countdown-a, countdown-b.
-					</dd>
+					<!-- Affichage dynamique des données des assets 3D -->
+					<template v-for="(asset, index) in asset3D" :key="index">
+						<dt>
+							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+						</dt>
+						<dd>
+							by
+							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+							under
+							<a :href="asset.license.link" target="_blank">{{
+								asset.license.name
+							}}</a>
+						</dd>
+						<dd v-if="asset.modifications">
+							Modifications : {{ asset.modifications }}
+						</dd>
+					</template>
 
 					<dt>
-						<a href="https://opengameart.org/content/starfishario" target="_blank"
-							>Starfishario</a
-						>
+						<p v-if="audioAssets.length == 1" class="asset-type">Included audio</p>
+						<p v-if="audioAssets.length > 1" class="asset-type">Included audios</p>
 					</dt>
-					<dd>
-						by
-						<a href="https://opengameart.org/users/iamoneabe" target="_blank"
-							>iamoneabe</a
-						>
-						under
-						<a
-							href="https://creativecommons.org/publicdomain/zero/1.0/"
-							target="_blank"
-							>CC 0</a
-						>
-					</dd>
+
+					<!-- Affichage dynamique des données des assets audio -->
+					<template v-for="(asset, index) in audioAssets" :key="index">
+						<dt>
+							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+						</dt>
+						<dd>
+							by
+							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+							under
+							<a :href="asset.license.link" target="_blank">{{
+								asset.license.name
+							}}</a>
+						</dd>
+						<dd v-if="asset.modifications">
+							Modifications : {{ asset.modifications }}
+						</dd>
+					</template>
+
+					<dt>
+						<p v-if="imageAssets.length == 1" class="asset-type">Included image</p>
+						<p v-if="imageAssets.length > 1" class="asset-type">Included images</p>
+					</dt>
+
+					<!-- Affichage dynamique des données des images -->
+					<template v-for="(asset, index) in imageAssets" :key="index">
+						<dt>
+							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+						</dt>
+						<dd>
+							by
+							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+							under
+							<a :href="asset.license.link" target="_blank">{{
+								asset.license.name
+							}}</a>
+						</dd>
+						<dd v-if="asset.modifications">
+							Modifications : {{ asset.modifications }}
+						</dd>
+					</template>
 				</dl>
 			</div>
 		</div>
@@ -284,6 +387,10 @@ function enterScene() {
 </template>
 
 <style scoped>
+.warning {
+	color: #ffc107;
+}
+
 h1 {
 	font-size: 1.5rem;
 }
