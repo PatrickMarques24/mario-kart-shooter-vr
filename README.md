@@ -1,7 +1,7 @@
 <p align="center">
-    <img src="./logo.svg" alt="VAV Logo" align="center"/>
+    <img src="./logo.png" alt="VAV Logo" align="center"/>
 </p>
-<h1 align="center">Vue + A-Frame + Vite boilerplate</h1>
+<h1 align="center">Mario Kart Shooter VR</h1>
 
 > A boilerplate for A-Frame 1.5, Vue 3.4 and Vite 5.0
 
@@ -10,16 +10,9 @@
 ![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
-### [>> DEMO <<](https://onivers.com/aframe-vue-boilerplate/)
+### [>> DEMO <<](https://vr49.onivers.com/patrick/)
 
-## Included in the boilerplate
-
-### Libs and components
-
-- [aframe-extras controls and animation-mixer](https://github.com/c-frame/aframe-extras) (MIT License)
-- [aframe physx](https://github.com/c-frame/physx) (MIT License)
-- [aframe-blink-controls](https://github.com/jure/aframe-blink-controls) (MIT License)
-- [simple-navmesh-constraint](https://github.com/AdaRoseCannon/aframe-xr-boilerplate) (MIT Licence)
+## Included in the project
 
 ### Movement modes support
 
@@ -27,10 +20,77 @@
 - **Mobile** – 1x Finger touch to go forward + 2x Fingers touch to go backward + Gaze cursor for click
 - **VR Headset** – AR/VR walk + Teleport (Grip for grab and laser for click) + Gaze cursor for click
 
+### Libs and components
+
+- [**aframe-extras controls and animation-mixer**](https://github.com/c-frame/aframe-extras) \
+  by [c-frame](https://github.com/c-frame) is licensed under [MIT License](https://github.com/c-frame/aframe-extras/blob/master/LICENSE)
+
+- [**aframe physx**](https://github.com/c-frame/physx) \
+  by [c-frame](https://github.com/c-frame) is licensed under [MIT License](https://github.com/c-frame/aframe-extras/blob/master/LICENSE)
+
+- [**aframe-blink-controls**](https://github.com/jure/aframe-blink-controls/) \
+  by [jure](https://github.com/jure) is licensed under [MIT License](https://github.com/jure/aframe-blink-controls/blob/main/LICENSE)
+
+- [**simple-navmesh-constraint**](https://github.com/AdaRoseCannon/aframe-xr-boilerplate) \
+  by [AdaRoseCannon](https://github.com/AdaRoseCannon) is licensed under [MIT License](https://github.com/AdaRoseCannon/aframe-xr-boilerplate/blob/glitch/LICENSE)
+
 ### 3D models
 
-- **Main room** – [VR Gallery](https://sketchfab.com/3d-models/vr-gallery-1ac32ed62fdf424498acc146fad31f7e) by [Maxim Mavrichev](https://sketchfab.com/mvrc.art) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **3D physic room** – [3d_gallery_for_vr_projects](https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1) by [tekuto1s](https://sketchfab.com/tekuto1s) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- [**Go Kart**](https://skfb.ly/6TuMD) \
+  by [Samuel Thomas](https://sketchfab.com/SamuelTea) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- [**Banana Peel (Mario Kart)**](https://skfb.ly/6EvGw) \
+  by [Yanez Designs](https://sketchfab.com/Yanez-Designs) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- [**Red Koopa Troopa Shell (Super Mario Bros)**](https://skfb.ly/6zRWI) \
+  by [Yanez Designs](https://sketchfab.com/Yanez-Designs) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- [**super mario star**](https://skfb.ly/oyQUJ) \
+  by [gaelinix](https://sketchfab.com/gaelinix) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- [**Goomba**](https://skfb.ly/oLEQV) \
+  by [tirrellclark.75](https://sketchfab.com/tirrellclark.75) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- [**Brick Block (Super Mario Bros)**](https://skfb.ly/6zQG9) \
+  by [Yanez Designs](https://sketchfab.com/Yanez-Designs) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- [**DS DSi - Mario Kart DS - Mario Circuit**](https://skfb.ly/optKO) \
+  by [lonewolf1898](https://sketchfab.com/lonewolf1898) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) \
+  Modifications: Finish line removed and replaced with road texture.
+
+- [**Lakitu**](https://skfb.ly/oBoZp) \
+  by [Xen](https://sketchfab.com/XenMC) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) \
+  Modifications: A white board has been added to allow Lakitu to display text.
+
+- [**Project Zomboid - Radio**](https://skfb.ly/oPvCA) \
+  by [Phartam](https://sketchfab.com/Phartam) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+  ### Audio
+
+- [**Countdown**](https://opengameart.org/content/countdown) \
+  by [qubodup](https://opengameart.org/users/qubodup) is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) \
+  Modifications: Added the files together in the following order: countdown-a, countdown-a, countdown-b.
+
+- [**Starfishario**](https://opengameart.org/content/starfishario) \
+  by [iamoneabe](https://opengameart.org/users/iamoneabe) is licensed under [CC 0](https://creativecommons.org/publicdomain/zero/1.0/)
+
+- [**Victory!**](https://opengameart.org/content/victory-1) \
+  by [Viktor Kraus](https://opengameart.org/users/viktor-kraus) is licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) \
+  Modifications: Cut to 2:38, fade in at the beginning.
+
+- [**The Fun Run! - Day 3**](https://opengameart.org/content/the-fun-run-day-3) \
+  by [Zane Little Music](https://opengameart.org/users/zane-little-music) is licensed under [CC 0](https://creativecommons.org/publicdomain/zero/1.0/) \
+  Modifications: Cut to 1:10.
+
+- [**Game Over**](https://opengameart.org/content/game-over) \
+  by [Kistol](https://opengameart.org/users/kistol) is licensed under [CC 0](https://creativecommons.org/publicdomain/zero/1.0/) \
+  Modifications: Cut by 0.4 second.
+
+### Image
+
+- [**Les frères Mario**](https://www.favicon.cc/?action=icon&file_id=137640) \
+  by [marcojetson](https://www.favicon.cc/?action=icon_list&user_id=36881) is licensed under [CC 0](https://creativecommons.org/publicdomain/zero/1.0/) \
+  Modifications: Added a VR headset to Mario's head and two controllers.
 
 ---
 
@@ -41,7 +101,7 @@
 ### Clone (or fork, or download)
 
 ```sh
-git clone https://github.com/Chabloz/a-frame-vite-vue-boilerplate.git .
+git clone https://github.com/PatrickMarques24/mario-kart-shooter-vr.git
 ```
 
 ### Install dependencies

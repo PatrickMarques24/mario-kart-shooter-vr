@@ -23,6 +23,10 @@ const technologyAssets = [
 	{
 		name: "aframe-extras controls and animation-mixer",
 		link: "https://github.com/c-frame/aframe-extras",
+		author: {
+			name: "c-frame",
+			link: "https://github.com/c-frame",
+		},
 		license: {
 			name: "MIT License",
 			link: "https://github.com/c-frame/aframe-extras/blob/master/LICENSE",
@@ -32,6 +36,10 @@ const technologyAssets = [
 	{
 		name: "aframe physx",
 		link: "https://github.com/c-frame/physx",
+		author: {
+			name: "c-frame",
+			link: "https://github.com/c-frame",
+		},
 		license: {
 			name: "MIT License",
 			link: "https://github.com/c-frame/aframe-extras/blob/master/LICENSE",
@@ -41,6 +49,10 @@ const technologyAssets = [
 	{
 		name: "aframe-blink-controls",
 		link: "https://github.com/jure/aframe-blink-controls/",
+		author: {
+			name: "c-frame",
+			link: "https://github.com/c-frame",
+		},
 		license: {
 			name: "MIT License",
 			link: "https://github.com/jure/aframe-blink-controls/blob/main/LICENSE",
@@ -315,14 +327,17 @@ const imageAssets = [
 							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
 						</dt>
 						<dd>
+							by
+							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+							under
 							<a :href="asset.license.link" target="_blank">{{
 								asset.license.name
 							}}</a>
-							<template v-if="asset.author">
-								by <a :href="asset.authorLink" target="_blank">{{ asset.author }}</a>
-							</template>
-						</dd></template
-					>
+						</dd>
+						<dd v-if="asset.modifications">
+							Modifications : {{ asset.modifications }}
+						</dd>
+					</template>
 
 					<dt>
 						<p v-if="asset3D.length == 1" class="asset-type">Included 3D asset</p>
