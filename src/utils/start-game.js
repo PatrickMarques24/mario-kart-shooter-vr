@@ -33,12 +33,12 @@ export const startGame = (difficulty) => {
 		}, 0);
 	}
 
-	// If we are in VR
+	// If we are in VR we need to remove the laser during the game (doesn't work)
 	if (VR) {
-		document.querySelector("#hand-right").addEventListener("loaded", function () {
-			// Supprimer le contrôle laser
-			document.querySelector("#hand-right").removeAttribute("laser-controls");
-		});
+		document.querySelector("#hand-right").removeAttribute("laser-controls");
+		document
+			.querySelector("#hand-right")
+			.setAttribute("raycaster", "showLine", false);
 	}
 
 	// Disable WASD controls

@@ -6,13 +6,32 @@ export function positionOnLeftAndRightTheMiddleLane(
 	widthOfLane = 1
 ) {
 	const maValeurAleatoire = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+
+	// If VR, it's closer
+	if (VR) {
+		switch (maValeurAleatoire) {
+			case 1:
+				return -0.85;
+				break;
+			case 2:
+				return -0.85;
+				break;
+			case 3:
+				return Math.random() < 0.5 ? -0.85 : 0.85;
+				break;
+			case 4:
+				return 0.85;
+				break;
+			case 5:
+				return 0.85;
+				break;
+			default:
+				return 0;
+		}
+	}
+
 	switch (maValeurAleatoire) {
 		case 1:
-			// IF VR headset don't put the item too far from the player
-			if (VR) {
-				return -1;
-				break;
-			}
 			return -2;
 			break;
 		case 2:
@@ -25,11 +44,6 @@ export function positionOnLeftAndRightTheMiddleLane(
 			return 1;
 			break;
 		case 5:
-			// IF VR headset don't put the item too far from the player
-			if (VR) {
-				return 1;
-				break;
-			}
 			return 2;
 			break;
 		default:
