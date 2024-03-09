@@ -44,7 +44,6 @@ import "../aframe/physx-grab.js";
           collisionEntities: [data-role='nav-mesh'];
           snapTurn: false;
         "
-			raycaster="far: 4; objects: [clickable]; showLine: true; direction: 0 -1 0;"
 			position="0 1.5 0"
 			physx-grab
 		>

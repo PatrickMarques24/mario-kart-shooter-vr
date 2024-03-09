@@ -177,10 +177,8 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25);
 		:key="i"
 		:x="positionOnLeftAndRightTheMiddleLane()"
 		:y="0.3"
-		:z="Math.random() * 45 - 49"
+		:z="positionZOnTheLane()"
 		:rotation="`0 ${Math.random() * 3600} 0`"
-		clickable
-		simple-grab
 		physx-body="type: dynamic;"
 		physx-grabbable
 		physx-force-pushable
@@ -192,10 +190,8 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25);
 		:key="i"
 		:x="positionOnLeftAndRightTheMiddleLane()"
 		:y="0"
-		:z="Math.random() * 45 - 49"
+		:z="positionZOnTheLane()"
 		:rotation="`0 ${Math.random() * 3600} 0`"
-		clickable
-		simple-grab
 		physx-body="type: dynamic;"
 		physx-grabbable
 		physx-force-pushable
@@ -228,8 +224,6 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25);
 		:x="positionOnLeftAndRightTheMiddleLane()"
 		:y="0.256"
 		:z="positionZOnTheLane()"
-		clickable
-		simple-grab
 		physx-body="type: dynamic;"
 		physx-grabbable
 		physx-force-pushable
@@ -311,12 +305,12 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25);
 	<!-- If I put the width to large, the plane go to low or to high because it will collide with the bricks or with the goombas-->
 	<a-entity
 		id="allthecircuit"
-		geometry="primitive: plane; height: 60; width: 5"
+		geometry="primitive: plane; height: 60; width: 5.7"
 		position="0 0 -30"
 		rotation="-90 0 0"
 		data-role="nav-mesh"
 		material="color: blue"
-		visible="true"
+		visible="false"
 		physx-body="type: static"
 	></a-entity>
 </template>

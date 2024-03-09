@@ -2,6 +2,9 @@ export const startGame = (difficulty) => {
 	const head = document.querySelector("#head");
 	const cameraRig = document.querySelector("#camera-rig");
 	const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
+
+	// Disable the laser
+
 	// if (difficulty === "restart") {
 	// 	return;
 	// }
@@ -9,27 +12,33 @@ export const startGame = (difficulty) => {
 	// It's not allowed to move the camera in VR
 	if (!VR) {
 		head.setAttribute("position", `0 0.6 -0.2`);
+
+		// We need to put a setTimout because we change the attributes of a dynamic object (Physx documentation)
+		// Items are clicable only if we are not in VR (because we can grab them in VR and it's more immersive)
+		setTimeout(() => {
+			const allGoombas = document.querySelectorAll(".goomba");
+			allGoombas.forEach((goomba) => {
+				goomba.setAttribute("clickable", "");
+			});
+			const allBananas = document.querySelectorAll(".banana");
+			allBananas.forEach((banana) => {
+				banana.setAttribute("clickable", "");
+				banana.setAttribute("simple-grab", "");
+			});
+			const allStars = document.querySelectorAll(".star");
+			allStars.forEach((star) => {
+				star.setAttribute("clickable", "");
+				star.setAttribute("simple-grab", "");
+			});
+		}, 0);
 	}
 
 	// If we are in VR
 	if (VR) {
-		// Disable the clicks on all items to be more immersive
-		const allGoombas = document.querySelectorAll(".goomba");
-		allGoombas.forEach((goomba) => {
-			goomba.removeAttribute("clickable");
+		document.querySelector("#hand-right").addEventListener("loaded", function () {
+			// Supprimer le contrôle laser
+			document.querySelector("#hand-right").removeAttribute("laser-controls");
 		});
-		const allBananas = document.querySelectorAll(".banana");
-		allBananas.forEach((banana) => {
-			banana.removeAttribute("clickable");
-		});
-		const allStars = document.querySelectorAll(".star");
-		allStars.forEach((star) => {
-			star.removeAttribute("clickable");
-		});
-
-		// Disable the laser
-		document.querySelector("#left-hand").removeAttribute("raycaster");
-		document.querySelector("#right-hand").removeAttribute("raycaster");
 	}
 
 	// Disable WASD controls
