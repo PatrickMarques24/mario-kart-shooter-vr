@@ -289,125 +289,151 @@ const imageAssets = [
 			<button v-if="loaded" @click="enterScene()">Enter scene</button>
 			<div class="licences">
 				<section>
-					<h1 class="warning">Warning</h1>
+					<h2 class="warning">Warning</h2>
 					<p class="warning">
-						For the best VR experience, it's recommended to use a low chair or sit
-						comfortably on the ground. Avoid standing up or sitting down while wearing
-						the headset.
+						For the best VR experience for headset users, sit comfortably on the floor
+						or on a bed, adjusting the virtual floor height to match your seating
+						level. Use your headset's dedicated command to recenter your view before
+						clicking start.
+					</p>
+					<p class="warning">
+						Also, make sure you have enough space and avoid standing up or sitting
+						down once the game has started.
 					</p>
 				</section>
 				<section>
-					<h4>Movement modes support</h4>
-					<ul>
-						<li>
-							Desktop – Keyboard for move (WASD or Arrows keys) + Mouse for look
-							control (Drag and drop)
-						</li>
-						<li>
-							Mobile – 1x Finger touch to go forward + 2x Fingers touch to go backward
-							+ Gaze cursor for click
-						</li>
-						<li>
-							VR Headset – AR/VR walk + Teleport (Grip for grab and laser for click) +
-							Gaze cursor for click
-						</li>
-					</ul>
+					<h2>Movement modes support</h2>
+					<p>
+						Desktop <br />
+						Keyboard for move (WASD or Arrows keys) + Mouse for look control (Drag and
+						drop)
+					</p>
+
+					<p>
+						Mobile
+						<br />
+						1x Finger touch to go forward + 2x Fingers touch to go backward + Gaze
+						cursor for click
+					</p>
+
+					<p>
+						VR Headset
+						<br />
+						AR/VR walk + Teleport (Grip for grab and laser for click) + Gaze cursor
+						for click
+					</p>
 				</section>
-				<dl>
-					<dt>
-						<p v-if="technologyAssets.length == 1" class="asset-type">
-							Included technology
-						</p>
-						<p v-if="technologyAssets.length > 1" class="asset-type">
-							Included technologies
-						</p>
-					</dt>
-					<template v-for="(asset, index) in technologyAssets" :key="index">
+				<section>
+					<dl>
 						<dt>
-							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							<h2>Included</h2>
+							<h3 v-if="technologyAssets.length == 1" class="asset-type">
+								Technology
+							</h3>
+							<h3 v-if="technologyAssets.length > 1" class="asset-type">
+								Technologies
+							</h3>
 						</dt>
-						<dd>
-							by
-							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
-							under
-							<a :href="asset.license.link" target="_blank">{{
-								asset.license.name
-							}}</a>
-						</dd>
-						<dd v-if="asset.modifications">
-							Modifications : {{ asset.modifications }}
-						</dd>
-					</template>
+						<template v-for="(asset, index) in technologyAssets" :key="index">
+							<dt>
+								<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							</dt>
+							<dd>
+								by
+								<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+								under
+								<a :href="asset.license.link" target="_blank">{{
+									asset.license.name
+								}}</a>
+							</dd>
+							<dd v-if="asset.modifications">
+								Modifications : {{ asset.modifications }}
+							</dd>
+						</template>
 
-					<dt>
-						<p v-if="asset3D.length == 1" class="asset-type">Included 3D asset</p>
-						<p v-if="asset3D.length > 1" class="asset-type">Included 3D assets</p>
-					</dt>
-
-					<!-- Affichage dynamique des données des assets 3D -->
-					<template v-for="(asset, index) in asset3D" :key="index">
 						<dt>
-							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							<h3 v-if="asset3D.length == 1" class="asset-type">3D asset</h3>
+							<h3 v-if="asset3D.length > 1" class="asset-type">3D assets</h3>
 						</dt>
-						<dd>
-							by
-							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
-							under
-							<a :href="asset.license.link" target="_blank">{{
-								asset.license.name
-							}}</a>
-						</dd>
-						<dd v-if="asset.modifications">
-							Modifications : {{ asset.modifications }}
-						</dd>
-					</template>
 
-					<dt>
-						<p v-if="audioAssets.length == 1" class="asset-type">Included audio</p>
-						<p v-if="audioAssets.length > 1" class="asset-type">Included audios</p>
-					</dt>
+						<!-- Affichage dynamique des données des assets 3D -->
+						<template v-for="(asset, index) in asset3D" :key="index">
+							<dt>
+								<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							</dt>
+							<dd>
+								by
+								<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+								under
+								<a :href="asset.license.link" target="_blank">{{
+									asset.license.name
+								}}</a>
+							</dd>
+							<dd v-if="asset.modifications">
+								Modifications : {{ asset.modifications }}
+							</dd>
+						</template>
 
-					<!-- Affichage dynamique des données des assets audio -->
-					<template v-for="(asset, index) in audioAssets" :key="index">
 						<dt>
-							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							<h3 v-if="audioAssets.length == 1" class="asset-type">Audio</h3>
+							<h3 v-if="audioAssets.length > 1" class="asset-type">Audios</h3>
 						</dt>
-						<dd>
-							by
-							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
-							under
-							<a :href="asset.license.link" target="_blank">{{
-								asset.license.name
-							}}</a>
-						</dd>
-						<dd v-if="asset.modifications">
-							Modifications : {{ asset.modifications }}
-						</dd>
-					</template>
 
-					<dt>
-						<p v-if="imageAssets.length == 1" class="asset-type">Included image</p>
-						<p v-if="imageAssets.length > 1" class="asset-type">Included images</p>
-					</dt>
+						<!-- Affichage dynamique des données des assets audio -->
+						<template v-for="(asset, index) in audioAssets" :key="index">
+							<dt>
+								<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							</dt>
+							<dd>
+								by
+								<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+								under
+								<a :href="asset.license.link" target="_blank">{{
+									asset.license.name
+								}}</a>
+							</dd>
+							<dd v-if="asset.modifications">
+								Modifications : {{ asset.modifications }}
+							</dd>
+						</template>
 
-					<!-- Affichage dynamique des données des images -->
-					<template v-for="(asset, index) in imageAssets" :key="index">
 						<dt>
-							<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							<h3 v-if="imageAssets.length == 1" class="asset-type">Image</h3>
+							<h3 v-if="imageAssets.length > 1" class="asset-type">Images</h3>
 						</dt>
-						<dd>
-							by
-							<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
-							under
-							<a :href="asset.license.link" target="_blank">{{
-								asset.license.name
-							}}</a>
-						</dd>
-						<dd v-if="asset.modifications">
-							Modifications : {{ asset.modifications }}
-						</dd>
-					</template>
-				</dl>
+
+						<!-- Affichage dynamique des données des images -->
+						<template v-for="(asset, index) in imageAssets" :key="index">
+							<dt>
+								<a :href="asset.link" target="_blank">{{ asset.name }}</a>
+							</dt>
+							<dd>
+								by
+								<a :href="asset.author.link" target="_blank">{{ asset.author.name }}</a>
+								under
+								<a :href="asset.license.link" target="_blank">{{
+									asset.license.name
+								}}</a>
+							</dd>
+							<dd v-if="asset.modifications">
+								Modifications : {{ asset.modifications }}
+							</dd>
+						</template>
+					</dl>
+				</section>
+				<section>
+					<h2>Attributions</h2>
+					<p>
+						This work is created by
+						<a target="_blank" href="https://github.com/PatrickMarques24"
+							>Patrick Marques Meliciano</a
+						>
+						based on code provided by
+						<a target="_blank" href="https://github.com/Chabloz">Nicolas Chabloz</a>
+						during a
+						<a href="https://github.com/Chabloz/VR-A-Frame">VR course at HEIG-VD</a>.
+					</p>
+				</section>
 			</div>
 		</div>
 	</div>
@@ -420,6 +446,10 @@ const imageAssets = [
 
 h1 {
 	font-size: 1.5rem;
+}
+
+h2 {
+	font-size: 1.3rem;
 }
 
 a {
@@ -478,7 +508,7 @@ a {
 	cursor: pointer;
 }
 
-.asset-type {
+/* .asset-type {
 	margin-top: 20px;
-}
+} */
 </style>

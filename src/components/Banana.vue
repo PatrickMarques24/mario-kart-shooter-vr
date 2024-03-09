@@ -12,5 +12,6 @@ defineProps({
 		rotation="0 0 0"
 		:position="`${x} ${y} ${z}`"
 		scale="0.001 0.001 0.001"
+		class="banana"
 	></a-entity>
 </template>

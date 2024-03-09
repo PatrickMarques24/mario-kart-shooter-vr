@@ -22,6 +22,7 @@ import "../aframe/physx-grab.js";
 			position="0 1.63 0"
 		>
 			<a-entity
+				id="cursor"
 				geometry="primitive: circle; radius: 0.001;"
 				material="shader: flat; color: white;"
 				cursor
@@ -43,6 +44,7 @@ import "../aframe/physx-grab.js";
           collisionEntities: [data-role='nav-mesh'];
           snapTurn: false;
         "
+			raycaster="far: 4; objects: [clickable]; showLine: true; direction: 0 -1 0;"
 			position="0 1.5 0"
 			physx-grab
 		>
@@ -59,7 +61,7 @@ import "../aframe/physx-grab.js";
 			id="hand-right"
 			hand-controls="hand: right"
 			laser-controls="hand: right"
-			raycaster="far: 4; objects: [clickable]; showLine: true;"
+			raycaster="far: 4; objects: [clickable]; showLine: true; direction: 0 -1 0;"
 			position="0 1.5 0"
 			physx-grab
 		>

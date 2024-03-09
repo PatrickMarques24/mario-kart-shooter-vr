@@ -12,30 +12,29 @@ const gameOverPlay = document.querySelector("#game-over-play");
 
 const myradio = document.querySelector("#myradio");
 
-let coordonnees = `
-  x: 0;
-  y: 0;
-  z: 0;
-  handleRotation: true;
-  rot: 0;
-`;
+let coordonnees = "";
 
 // If VR
-if (AFRAME.utils.device.checkHeadsetConnected()) {
+const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
+if (VR) {
 	coordonnees = `
 	x: 0;
-	y: 0;
-	z: -0.2;
+	y: 0.8;
+	z: -0.4;
 	handleRotation: true;
 	rot: 0;
-  `;
+  	`;
+} else {
+	coordonnees = `
+	x: 0;
+  	y: 0.8;
+  	z: 0;
+  	handleRotation: true;
+	rot: 0;
+	`;
 }
 
 let music = true;
-
-function changeDifficulty(difficulty) {
-	gameDiff.value = difficulty;
-}
 
 function toggleMusic() {
 	music = !music;
@@ -88,7 +87,7 @@ function toggleMusic() {
 			color="#AAFFAA"
 			position="-1 -1.3 -3.25"
 			clickable
-			@click="changeDifficulty('easy')"
+			@click="gameDiff = 'easy'"
 			visible="true"
 			:teleport-camera-rig="`${coordonnees}`"
 		></a-box>
@@ -112,7 +111,7 @@ function toggleMusic() {
 			color="#AAAAFF"
 			position="0 -1.3 -3.25"
 			clickable
-			@click="changeDifficulty('medium')"
+			@click="gameDiff = 'medium'"
 			visible="true"
 			:teleport-camera-rig="`${coordonnees}`"
 		></a-box>
@@ -136,7 +135,7 @@ function toggleMusic() {
 			color="#FF5555"
 			position="1 -1.3 -3.25"
 			clickable
-			@click="changeDifficulty('hard')"
+			@click="gameDiff = 'hard'"
 			visible="true"
 			:teleport-camera-rig="`${coordonnees}`"
 		></a-box>
@@ -202,14 +201,14 @@ function toggleMusic() {
 	>
 	</a-entity>
 
-	<!-- <a-entity
+	<a-entity
 		geometry="primitive: plane; height: 7; width: 4.2"
 		position="0 -100.1 0"
 		rotation="-90 0 0"
 		data-role="nav-mesh"
 		material="color: blue"
 		visible="false"
-	></a-entity> -->
+	></a-entity>
 </template>
 
 <style scoped></style>

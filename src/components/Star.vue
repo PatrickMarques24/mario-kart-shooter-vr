@@ -12,6 +12,7 @@ defineProps({
 		rotation="0 0 0"
 		:position="`${x} ${y} ${z}`"
 		scale="0.1 0.1 0.1"
-		animation__rotate="property: rotation; to: 0 359 0; autoplay: true; loop: true; dur: 5000; ease : easeInOutQuad"
+		animation__rotate="property: rotation; to: 0 360 0; autoplay: true; loop: true; dur: 5000; ease : easeInOutQuad"
+		class="star"
 	></a-entity>
 </template>

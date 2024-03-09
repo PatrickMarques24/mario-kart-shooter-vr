@@ -22,10 +22,11 @@ AFRAME.registerComponent("move", {
 		let position = this.el.object3D.position;
 		setTimeout(() => {
 			if (this.data.posZ > -53) {
-				this.data.posZ -= 0.0175;
+				// this.data.posZ -= 0.0175;
 
 				// For development purpose (to test the end of the game faster)
-				// this.data.posZ -= 1;
+				this.data.posZ -= 1;
+				// this.data.posZ -= 0.025;
 
 				// Change the Z position
 				this.el.setAttribute(
@@ -38,5 +39,8 @@ AFRAME.registerComponent("move", {
 
 			// Timeout for the countdown before moving
 		}, 3000);
+	},
+	pause: function () {
+		this.data.posZ = 0;
 	},
 });

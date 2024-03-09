@@ -5,6 +5,7 @@ import {
 	gameDiff,
 	gameFinished,
 	goombaKilled,
+	grabbedItem,
 	startSquare,
 	roadSquare,
 	targetBoxes,
@@ -23,12 +24,18 @@ import "../aframe/teleport-camera-rig.js";
 import "../aframe/simple-grab.js";
 import "../aframe/proximity-trigger.js";
 import "../aframe/move.js";
+import "../aframe/physx-force-pushable.js";
 
 // Utils
 import { toggleFog } from "../utils/weather-and-time.js";
 import { createPavement } from "../utils/create-pavement.js";
 import { createGoombaPavement } from "../utils/create-goomba-pavement.js";
-import { positionOnLeftAndRightTheMiddleLane } from "../utils/position-on-lane.js";
+import {
+	positionOnLeftAndRightTheMiddleLane,
+	positionZOnTheLane,
+} from "../utils/position-on-lane.js";
+import { startGame } from "../utils/start-game.js";
+import { finishGame } from "../utils/finish-game.js";
 
 // Components
 import Kart from "./Kart.vue";
@@ -36,6 +43,7 @@ import Banana from "./Banana.vue";
 import RedShell from "./RedShell.vue";
 import Star from "./Star.vue";
 import Lakitu from "./Lakitu.vue";
+import Musics from "./Musics.vue";
 
 // Const and variables
 let numberOfBananas = 0;
@@ -50,86 +58,53 @@ const scoreText = document.querySelector("#score-text");
 
 const loaded = ref(false);
 
-import { grabbedItem } from "../store/game.js";
+const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
 
-watch(grabbedItem, (item) => {
-	// if (item === "banana") {
-	// 	// Play the banana sound
-	// 	document.querySelector("#banana-sound").components.sound.playSound();
-	// }
-	// if (item === "red-shell") {
-	// 	// Play the red shell sound
-	// 	document.querySelector("#red-shell-sound").components.sound.playSound();
-	// }
-	// if (item === "star") {
-	// 	// Play the star sound
-	// 	document.querySelector("#star-sound").components.sound.playSound();
-	// }
-});
+// function restart() {
+// 	gameDiff = "restart";
+
+// 	alert("Restarting the game");
+// 	// Stop the finishmusic
+// 	// document.querySelector("#victory-play").components.sound.pauseSound();
+
+// 	document
+// 		.querySelector("#lakitu-instance")
+// 		.setAttribute("position", "1 0.5 -3");
+// 	document.querySelector("#lakitu-instance").setAttribute("scale", "1 1 1");
+
+// 	document.querySelector("#camera-rig").removeAttribute("bind-position");
+// 	document.querySelector("#camera-rig").setAttribute("position", "0 -100 0");
+// 	// restart the game
+// 	document.querySelector("#mykart").removeAttribute("move", "");
+// 	document.querySelector("#mykart").setAttribute("position", "0 0.274 0");
+// 	document.querySelector("#mykart").setAttribute("rotation", "0 180 0");
+// 	document.querySelectorAll(".goomba-pavement")?.forEach((goomba) => {
+// 		goomba.remove();
+// 	});
+// 	document.querySelectorAll(".banana")?.forEach((banana) => {
+// 		banana.remove();
+// 	});
+// 	document.querySelectorAll(".red-shell")?.forEach((redShell) => {
+// 		redShell.remove();
+// 	});
+// 	document.querySelectorAll(".star")?.forEach((star) => {
+// 		star.remove();
+// 	});
+// 	document.querySelector("#score-plane").setAttribute("visible", "false");
+// 	goombaKilled.value = 0;
+// 	gameFinished.value = false;
+
+// 	createGoombaPavement(targetBoxes, -3.5, 0, -51.625, -0.25, 0.25, true);
+// 	createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
+
+// 	loaded.value = false;
+
+// 	document.querySelector("#game-over-play").components.sound.pauseSound();
+// }
 
 watch(gameDiff, (difficulty) => {
-	// If we arent in VR, change the position of the camera
-	// It's not allowed to move the camera in VR
-	if (!AFRAME.utils.device.checkHeadsetConnected()) {
-		head.setAttribute("position", `0 0.8 -0.2`);
-	}
+	startGame(difficulty);
 
-	// If we are in VR
-	if (AFRAME.utils.device.checkHeadsetConnected()) {
-		// cameraRig.setAttribute("position", `0 0 -0.2`);
-	}
-
-	// Disable WASD controls
-	cameraRig.removeAttribute("movement-controls");
-
-	// We begin the game
-	const lakituText = document.querySelector("#lakitu-text");
-	lakituText.setAttribute("value", "3");
-	lakituText.setAttribute("scale", "0.2 0.2 0.2");
-
-	// We begin the countdown
-	// Play the countdown
-	document.querySelector("#start").components.sound.playSound();
-	setTimeout(() => {
-		lakituText.setAttribute("value", "2");
-	}, 1500);
-
-	setTimeout(() => {
-		lakituText.setAttribute("value", "GO !");
-		// Go to the sky
-		document
-			.querySelector("#lakitu-instance")
-			.setAttribute(
-				"animation__2",
-				"property: position; to: 1 10 -3; dur: 2000; easing: easeInOutQuad; delay: 500"
-			);
-		document
-			.querySelector("#lakitu-instance")
-			.setAttribute(
-				"animation__3",
-				"property: scale; to: 0 0 0; dur: 2000; easing: easeInOutQuad; delay: 500"
-			);
-	}, 2500);
-
-	// Play the game music 500 ms after the countdown finish (so delay 3000) and pause the main theme
-	setTimeout(() => {
-		document.querySelector("#game-play").components.sound.playSound();
-		document.querySelector("#theme-music-play").components.sound.pauseSound();
-	}, 3000);
-
-	document.querySelector("#mykart").setAttribute("move", "");
-	document.querySelector("#mykart").removeAttribute("clickable");
-	document
-		.querySelector("#camera-rig")
-		.setAttribute("bind-position", "target: #mykart");
-
-	const allGoombas = document.querySelectorAll(".goombas");
-	allGoombas.forEach((goomba) => {
-		goomba.setAttribute("clickable", "");
-		// goomba.setAttribute("simple-grab", "");
-	});
-	// document.querySelector(".camera-container").setAttribute("move", "");
-	// alert(difficulty);
 	switch (difficulty) {
 		case "easy":
 			numberOfBananas = easy.bananas;
@@ -153,52 +128,26 @@ watch(gameDiff, (difficulty) => {
 			loaded.value = true;
 			break;
 		default:
-			alert("Nothing appenend");
+			console.log("Nothing appenend");
 			break;
 	}
 });
 
-watch(gameFinished, (finished) => {
-	// I need to declare again  because the watch function is not reactive
-	const cameraRig = document.querySelector("#camera-rig");
-	const scorePlane = document.querySelector("#score-plane");
-	const scoreText = document.querySelector("#score-text");
-	const gamePlay = document.querySelector("#game-play");
-	const victoryPlay = document.querySelector("#victory-play");
-	const gameOverPlay = document.querySelector("#game-over-play");
-
-	if (finished) {
-		// Music part
-
-		gamePlay.components.sound.pauseSound();
-
-		// If the player killed at least one goomba, play the victory music, else play the game over music
-		if (goombaKilled.value > 0) {
-			victoryPlay.components.sound.playSound();
-		} else {
-			gameOverPlay.components.sound.playSound();
-		}
-
-		// End of music part
-
-		document.querySelectorAll(".goombas").forEach((goomba) => {
+watch(grabbedItem, () => {
+	// If the player has an item, the goombas are clickable
+	if (grabbedItem.value) {
+		document.querySelectorAll(".goomba").forEach((goomba) => {
+			goomba.setAttribute("clickable", "");
+		});
+	} else {
+		document.querySelectorAll(".goomba").forEach((goomba) => {
 			goomba.removeAttribute("clickable");
 		});
-		cameraRig.setAttribute("movement-controls", "camera: #head;");
-		cameraRig.setAttribute("disable-in-vr", "component: movement-controls;");
-		scoreText.setAttribute(
-			"value",
-			`Difficulty : ${gameDiff.value} \n
-			${
-				goombaKilled.value > 0
-					? `Congratulations ! 🏆 \n You hit ${goombaKilled.value}`
-					: "Oh no :( \n You didn't touch any"
-			} ${goombaKilled.value > 1 ? "goombas" : "goomba"}!`
-		);
-		scorePlane.setAttribute("visible", "true");
-		document.querySelector("#camera-rig").removeAttribute("bind-position");
-		// document.querySelector("#restart-plane").setAttribute("visible", "true");
 	}
+});
+
+watch(gameFinished, (finished) => {
+	finishGame(finished);
 });
 
 toggleFog(true, "00AAFF", 20, 40);
@@ -206,45 +155,19 @@ toggleFog(true, "00AAFF", 20, 40);
 createPavement(startSquare, -2.39, 0.025, -2);
 createPavement(startSquare, -2.39, 0.025, -52);
 createPavement(roadSquare, -2.015, 0, -26.625);
-createGoombaPavement(targetBoxes, -3.5, 0, -51.625, -0.25, 0.25, true);
-createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
+createGoombaPavement(targetBoxes, -3.5, 0, -51.625, -0.25, 0.25);
+createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25);
 </script>
 
 <template>
-	<a-entity
-		id="theme-music-play"
-		sound="src: #theme-music; autoplay: false; loop: true; volume : 0.4;"
-		bind-position="target: #head"
-	></a-entity>
-	<a-entity
-		id="start"
-		sound="src: #start-sound; autoplay: false; loop: false; volume : 1;"
-		position="0 0.8 -0.2"
-		bind-position="target: #head"
-	></a-entity>
-	<a-entity
-		id="game-over-play"
-		sound="src: #game-over-music; autoplay: false; loop: true; volume : 1;"
-		bind-position="target: #head"
-	>
-	</a-entity>
-	<a-entity
-		id="game-play"
-		sound="src: #game-music; autoplay: false; loop: true; volume : 0.4;"
-		bind-position="target: #head"
-	></a-entity>
-	<a-entity
-		id="victory-play"
-		sound="src: #victory-music; autoplay: false; loop: false; volume : 0.4;"
-		bind-position="target: #head"
-	></a-entity>
+	<Musics />
 
 	<Kart
 		id="mykart"
 		position="0 0.274 0"
 		rotation="0 180 0"
 		clickable
-		:teleport-camera-rig="` x: 0; y: -100; z: 0;
+		_:teleport-camera-rig="` x: 0; y: -100; z: 0;
 	handleRotation: 'false'; rot: 0; `"
 	/>
 
@@ -258,6 +181,9 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		:rotation="`0 ${Math.random() * 3600} 0`"
 		clickable
 		simple-grab
+		physx-body="type: dynamic;"
+		physx-grabbable
+		physx-force-pushable
 	/>
 
 	<RedShell
@@ -270,11 +196,16 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		:rotation="`0 ${Math.random() * 3600} 0`"
 		clickable
 		simple-grab
+		physx-body="type: dynamic;"
+		physx-grabbable
+		physx-force-pushable
 	/>
 
 	<Lakitu id="lakitu-instance" :x="1" :y="0.5" :z="-3" />
 
+	<!-- In desktop, I don't really need gravity, so I can make the stars flying -->
 	<a-entity
+		v-if="!VR"
 		position="0 0.2 0"
 		animation__elevate="property: position; to: 0 0.5 0; autoplay: true; dir: alternate; loop: true; dur: 1000; easing: easeInOutQuad"
 	>
@@ -284,11 +215,25 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 			:key="i"
 			:x="positionOnLeftAndRightTheMiddleLane()"
 			:y="0.256"
-			:z="Math.random() * 45 - 49"
+			:z="positionZOnTheLane()"
 			clickable
 			simple-grab
 		/>
 	</a-entity>
+
+	<Star
+		v-if="loaded && VR"
+		v-for="i in numberOfStars"
+		:key="i"
+		:x="positionOnLeftAndRightTheMiddleLane()"
+		:y="0.256"
+		:z="positionZOnTheLane()"
+		clickable
+		simple-grab
+		physx-body="type: dynamic;"
+		physx-grabbable
+		physx-force-pushable
+	/>
 
 	<a-entity
 		gltf-model="#circuit"
@@ -337,8 +282,8 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		width="1.5"
 		color="red"
 		visible="false"
-		:teleport-camera-rig="` x: 0; y: -100; z: 0;
-	handleRotation: 'false'; rot: 0; `"
+		_clickable
+		@click="restart()"
 	>
 		><a-text
 			value="Restart"
@@ -351,16 +296,6 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		></a-text
 	></a-plane>
 
-	<!-- <a-light
-		type="ambient"
-		color="#00A8E5"
-		intensity="1"
-		decay="2"
-		backgroundColor="#DDA090"
-		position="0 10 -25"
-	>
-	</a-light> -->
-
 	<!-- Navigation mesh -->
 	<!-- <a-entity
 		id="originalnavmesh"
@@ -370,5 +305,18 @@ createGoombaPavement(targetBoxes, 3.5, 0, -51.625, -0.25, 0.25, true);
 		data-role="nav-mesh"
 		material="color: blue"
 		visible="true"
+		physx-body="type: static"
 	></a-entity> -->
+
+	<!-- If I put the width to large, the plane go to low or to high because it will collide with the bricks or with the goombas-->
+	<a-entity
+		id="allthecircuit"
+		geometry="primitive: plane; height: 60; width: 5"
+		position="0 0 -30"
+		rotation="-90 0 0"
+		data-role="nav-mesh"
+		material="color: blue"
+		visible="true"
+		physx-body="type: static"
+	></a-entity>
 </template>
