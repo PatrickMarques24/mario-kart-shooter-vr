@@ -1,7 +1,18 @@
 export const startGame = (difficulty) => {
 	const head = document.querySelector("#head");
 	const cameraRig = document.querySelector("#camera-rig");
-	const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
+	const lakituInstance = document.querySelector("#lakitu-instance");
+	const lakituText = document.querySelector("#lakitu-text");
+	const handRight = document.querySelector("#hand-right");
+	const startPlay = document.querySelector("#start");
+	const gamePlay = document.querySelector("#game-play");
+	const themeMusicPlay = document.querySelector("#theme-music-play");
+	const myKart = document.querySelector("#mykart");
+	// If VR
+	const VR =
+		AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()
+			? true
+			: false;
 
 	// Disable the laser
 
@@ -9,7 +20,6 @@ export const startGame = (difficulty) => {
 	// 	return;
 	// }
 	// If we arent in VR, change the position of the camera
-	// It's not allowed to move the camera in VR
 	if (!VR) {
 		head.setAttribute("position", `0 0.6 -0.2`);
 
@@ -25,6 +35,11 @@ export const startGame = (difficulty) => {
 				banana.setAttribute("clickable", "");
 				banana.setAttribute("simple-grab", "");
 			});
+			const redShell = document.querySelectorAll(".red-shell");
+			redShell.forEach((shell) => {
+				shell.setAttribute("clickable", "");
+				shell.setAttribute("simple-grab", "");
+			});
 			const allStars = document.querySelectorAll(".star");
 			allStars.forEach((star) => {
 				star.setAttribute("clickable", "");
@@ -35,23 +50,20 @@ export const startGame = (difficulty) => {
 
 	// If we are in VR we need to remove the laser during the game (doesn't work)
 	if (VR) {
-		document.querySelector("#hand-right").removeAttribute("laser-controls");
-		document
-			.querySelector("#hand-right")
-			.setAttribute("raycaster", "showLine", false);
+		handRight.removeAttribute("laser-controls");
+		handRight.setAttribute("raycaster", "showLine", false);
 	}
 
 	// Disable WASD controls
 	cameraRig.removeAttribute("movement-controls");
 
 	// We begin the game
-	const lakituText = document.querySelector("#lakitu-text");
 	lakituText.setAttribute("value", "3");
 	lakituText.setAttribute("scale", "0.2 0.2 0.2");
 
 	// We begin the countdown
 	// Play the countdown
-	document.querySelector("#start").components.sound.playSound();
+	startPlay.components.sound.playSound();
 	setTimeout(() => {
 		lakituText.setAttribute("value", "2");
 	}, 1500);
@@ -59,34 +71,23 @@ export const startGame = (difficulty) => {
 	setTimeout(() => {
 		lakituText.setAttribute("value", "GO !");
 		// Go to the sky
-		document
-			.querySelector("#lakitu-instance")
-			.setAttribute(
-				"animation__2",
-				"property: position; to: 1 10 -3; dur: 2000; easing: easeInOutQuad; delay: 500"
-			);
-		document
-			.querySelector("#lakitu-instance")
-			.setAttribute(
-				"animation__3",
-				"property: scale; to: 0 0 0; dur: 2000; easing: easeInOutQuad; delay: 500"
-			);
+		lakituInstance.setAttribute(
+			"animation__2",
+			"property: position; to: 1 10 -3; dur: 2000; easing: easeInOutQuad; delay: 500"
+		);
+		lakituInstance.setAttribute(
+			"animation__3",
+			"property: scale; to: 0 0 0; dur: 2000; easing: easeInOutQuad; delay: 500"
+		);
 	}, 2500);
 
 	// Play the game music 500 ms after the countdown finish sound begins (so delay 3000) and pause the main theme
 	setTimeout(() => {
-		document.querySelector("#game-play").components.sound.playSound();
-		document.querySelector("#theme-music-play").components.sound.pauseSound();
+		gamePlay.components.sound.playSound();
+		themeMusicPlay.components.sound.pauseSound();
 	}, 3000);
 
-	document.querySelector("#mykart").setAttribute("move", "");
-	document.querySelector("#mykart").removeAttribute("clickable");
-	document
-		.querySelector("#camera-rig")
-		.setAttribute("bind-position", "target: #mykart");
-
-	// const allGoombas = document.querySelectorAll(".goombas");
-	// allGoombas.forEach((goomba) => {
-	// 	goomba.setAttribute("clickable", "");
-	// });
+	myKart.setAttribute("move", "");
+	myKart.removeAttribute("clickable");
+	cameraRig.setAttribute("bind-position", "target: #mykart");
 };

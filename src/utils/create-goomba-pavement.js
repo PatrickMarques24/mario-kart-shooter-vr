@@ -2,6 +2,12 @@ import { killGoomba, killGoombaVR } from "./killgoomba.js";
 import "../aframe/physx-force-pushable.js";
 import { goombaKilled, grabbedItem } from "../store/game.js";
 
+// If VR
+const VR =
+	AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()
+		? true
+		: false;
+
 export const createGoombaPavement = (
 	data,
 	x = 0,
@@ -10,6 +16,7 @@ export const createGoombaPavement = (
 	minHeight = 0,
 	maxHeight = 0
 ) => {
+	const aScene = document.querySelector("a-scene");
 	const tileFloor = document.createElement("a-entity");
 	for (let i = 0; i < data.cols; i++) {
 		for (let j = 0; j < data.rows; j++) {
@@ -68,7 +75,7 @@ export const createGoombaPavement = (
 				goomba.setAttribute("physx-force-pushable", "");
 
 				// If VR, we need to make the goomba kinematic and add a contactbegin event listener to kill them, and it's on kinematic, so it will not fall but after the kill it will
-				if (AFRAME.utils.device.checkHeadsetConnected()) {
+				if (VR) {
 					goomba.setAttribute("physx-body", "type: kinematic;");
 
 					// Callback is in external function because we need to remove the event listener after the goomba is killed
@@ -86,7 +93,7 @@ export const createGoombaPavement = (
 				}
 
 				// If not VR, we can kill the goomba by clicking on them, and it's on dynamic, so it will fall or fly
-				if (!AFRAME.utils.device.checkHeadsetConnected()) {
+				if (!VR) {
 					goomba.setAttribute("physx-body", "type: dynamic;");
 					goomba.addEventListener("click", (e) =>
 						killGoomba(
@@ -107,5 +114,5 @@ export const createGoombaPavement = (
 	tileFloor.setAttribute("position", `${x} ${y} ${z}`);
 	tileFloor.setAttribute("class", "goomba-pavement");
 
-	document.querySelector("a-scene").appendChild(tileFloor);
+	aScene.appendChild(tileFloor);
 };

@@ -7,6 +7,7 @@ export const createPavement = (
 	maxHeight = 0,
 	iPutGoombaOnIt = false
 ) => {
+	const aScene = document.querySelector("a-scene");
 	const tileFloor = document.createElement("a-entity");
 	for (let i = 0; i < data.cols; i++) {
 		for (let j = 0; j < data.rows; j++) {
@@ -37,5 +38,5 @@ export const createPavement = (
 	// position the pavement
 	tileFloor.setAttribute("position", `${x} ${y} ${z}`);
 
-	document.querySelector("a-scene").appendChild(tileFloor);
+	aScene.appendChild(tileFloor);
 };

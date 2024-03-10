@@ -57,8 +57,11 @@ const scorePlane = document.querySelector("#score-plane");
 const scoreText = document.querySelector("#score-text");
 
 const loaded = ref(false);
-
-const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
+// If VR
+const VR =
+	AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()
+		? true
+		: false;
 
 // function restart() {
 // 	gameDiff = "restart";

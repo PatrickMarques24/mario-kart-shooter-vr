@@ -1,4 +1,8 @@
-const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
+// If VR
+const VR =
+	AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()
+		? true
+		: false;
 
 export function positionOnLeftAndRightTheMiddleLane(
 	numberOfLanes = 5,

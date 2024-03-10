@@ -9,13 +9,16 @@ const start = document.querySelector("#start");
 const gamePlay = document.querySelector("#game-play");
 const victoryPlay = document.querySelector("#victory-play");
 const gameOverPlay = document.querySelector("#game-over-play");
-
-const myradio = document.querySelector("#myradio");
+const myRadio = document.querySelector("#myradio");
 
 let coordonnees = "";
 
 // If VR
-const VR = AFRAME.utils.device.checkHeadsetConnected() ? true : false;
+const VR =
+	AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()
+		? true
+		: false;
+
 if (VR) {
 	coordonnees = `
 	x: 0;
@@ -36,8 +39,10 @@ if (VR) {
 
 let music = true;
 
-function toggleMusic() {
+const toggleMusic = () => {
 	music = !music;
+
+	const myRadio = document.querySelector("#myradio");
 
 	const allMusic = [theme, start, gamePlay, victoryPlay, gameOverPlay];
 
@@ -47,22 +52,20 @@ function toggleMusic() {
 		gamePlay.setAttribute("sound", "volume : 0.4;");
 		victoryPlay.setAttribute("sound", "volume : 0.4;");
 		gameOverPlay.setAttribute("sound", "volume : 1;");
-		document.querySelector("#myradio").setAttribute("scale", "0.2 0.2 0.2");
-		document
-			.querySelector("#myradio")
-			.setAttribute(
-				"animation",
-				"property: scale; to: 0.22 0.22 0.22; dur: 250; dir: alternate; loop: true"
-			);
+		myRadio.setAttribute("scale", "0.2 0.2 0.2");
+		myRadio.setAttribute(
+			"animation",
+			"property: scale; to: 0.22 0.22 0.22; dur: 250; dir: alternate; loop: true"
+		);
 	} else {
 		allMusic.forEach((music) => {
 			music.setAttribute("sound", "volume: 0;");
 		});
 
 		// I don't know why, but if I put myradio.removeAt... it doesn't work
-		document.querySelector("#myradio").removeAttribute("animation");
+		myRadio.removeAttribute("animation");
 	}
-}
+};
 </script>
 
 <template>
